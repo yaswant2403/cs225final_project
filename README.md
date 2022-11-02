@@ -3,5 +3,5 @@
 Yash Ejjagiri (yse2) \
 Afif Shomali (shomali2) \
 Lisa Jing Leung (ljleung2) \
-Libby Codamon (ecoda2) \
-# ---
+Libby Codamon (ecoda2) 
+
