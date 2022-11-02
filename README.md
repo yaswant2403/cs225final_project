@@ -1,2 +1,7 @@
-# cs225final_project
-CS 225 Fall 22 Final Project
+## cs225 final_project
+# Contributors: 
+Yash Ejjagiri (yse2)
+Afif Shomali (shomali2)
+Lisa Jing Leung (ljleung2)
+Libby Codamon (ecoda2)
+# ---
