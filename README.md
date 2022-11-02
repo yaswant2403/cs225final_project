@@ -1,4 +1,4 @@
-## cs225 final_project
+## cs225 final_project (replace with project name)
 # Contributors: 
 Yash Ejjagiri (yse2) \
 Afif Shomali (shomali2) \
