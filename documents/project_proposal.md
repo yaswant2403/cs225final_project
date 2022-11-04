@@ -28,7 +28,7 @@ The expected output would be in the form of a string displaying the shortest edg
 ###### Function Efficiency:  
 The target goal for time complexity would be O((E + V) LogV) where E represents the edges of the graph and V represents the nodes/vertices of the graph. The space complexity goal is O(V) where V denotes the number of nodes in the graph.
 
-####2) Degree Centrality  
+#### 2) Degree Centrality  
 ###### Function Inputs:   
 Degree centrality of a node refers to the number of edges attached to the node. Thus, our inputs would be two user ids and we could compare which user has a higher degree centrality allowing us to determine which user is the most “popular”.  
 
