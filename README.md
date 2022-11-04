@@ -5,3 +5,5 @@ Afif Shomali (shomali2) \
 Lisa Jing Leung (ljleung2) \
 Libby Codamon (ecoda2) 
 
+# Structure
+Team Contract, Proposal & Weekly Logs can be found in 'documents/'
