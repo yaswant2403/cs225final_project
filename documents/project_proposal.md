@@ -19,35 +19,35 @@ We will use an undirected & unweighted graph to represent the friend circle. We 
 
 ## Algorithm 
 #### 1) Dijisktra’s Algorithm  
-######Function Inputs: 
+###### Function Inputs: 
  The expected inputs for our algorithm would be two user ids. Our dataset currently is given as an adjacency list, however, which nodes are connected to which are already given. Thus, we would build our graphs with these nodes and then find the shortest connection between the two user ids.  
 
-######Function Outputs:  
+###### Function Outputs:  
 The expected output would be in the form of a string displaying the shortest edges that are traveled through to get to the end user-id. If time permits, we would also visualize the shortest connection and generate a PNG.  
 
-######Function Efficiency:  
+###### Function Efficiency:  
 The target goal for time complexity would be O((E + V) LogV) where E represents the edges of the graph and V represents the nodes/vertices of the graph. The space complexity goal is O(V) where V denotes the number of nodes in the graph.
 
 ####2) Degree Centrality  
-######Function Inputs:   
+###### Function Inputs:   
 Degree centrality of a node refers to the number of edges attached to the node. Thus, our inputs would be two user ids and we could compare which user has a higher degree centrality allowing us to determine which user is the most “popular”.  
 
-######Function Outputs:  
+###### Function Outputs:  
 Out outputs will be the number of edges attached to each user, as well which user is most “popular” based on degree centrality.  
 
-######Function Efficiency:  
+###### Function Efficiency:  
 The goal time complexity for the degree centrality algorithm is O(V^2) as that’s the runtime of degree centrality for all the nodes in a graph. Ideally, we would want a smaller runtime, as we would only find the degree centrality of two given nodes. The goal space complexity is also O(V^2), where V is all the nodes in the graph. 
 
 #### 3) BFS Traversal
-######Function Input:  
+###### Function Input:  
 List of Nodes & Edges, If we decide to create a visualization of the friend network, this function would add a nodes & edges between them to the visulization.   
-######Function Ouputs:  
+###### Function Ouputs:  
 A BFS traversal of our friend graph, and if time permits a visualization of the friend circle.   
-######Function Efficiency:   
+###### Function Efficiency:   
 The efficiency of this traversal is O( V + E ) where V are the nodes and E are the edges since we need to process all nodes & edges. The space complexity is O (V) since we may need to hold all nodes on a queue at once.
 
 ## Timeline
-######Week 1: 10/31 - 11/4: 
+###### Week 1: 10/31 - 11/4: 
 Project Planning: finish and submit project proposal by November 4th  
 ######	Week 2: 11/7 - 11/11:   
 	Data acquisition and data processing: 
