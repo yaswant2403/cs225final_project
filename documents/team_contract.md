@@ -3,8 +3,8 @@
 ## Communication
 1. **Team Meetings** 
 
- **Time:** Wednesdays (4-5)  
-**Location:** In-person (location varies, but will be agreed upon through the group chat the day of or day before) 
+    **Time:** Wednesdays (4-5)  
+    **Location:** In-person (location varies, but will be agreed upon through the group chat the day of or day before) 
 
 2. **Assistance** 
     Text groupchat and response within 24 hours. If a group member is have trouble completing a certain task, we will go over it as a group and help them out.
