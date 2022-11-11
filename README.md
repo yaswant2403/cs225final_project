@@ -15,11 +15,17 @@ The entry point source files are stored in `entry/`
 # Running code 
 
 In the CS225 docker enviorment, in the root directory run:  
-`mkdir build`  
-`cd build`  
-To create a build directory, then run:  
-`cmake ..`  
-To initialize cmake, after this you can run:  
-`make main`  
-`./main`  
+```
+mkdir build 
+cd build
+```
+To create a build directory, then run: 
+```
+cmake ..  
+```
+To initialize cmake, after this you can run: 
+```
+make main
+./main 
+```
 (Todo: Replace the "make main" above with our actual entry and exectuable later)
