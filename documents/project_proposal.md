@@ -1,32 +1,31 @@
-## Project Proposal
 ## Leading Question 
-For this project, we are hoping to produce a Facebook profile search tool where users can input a user profile and receive their importance within the Facebook network. We define importance as the amount of social connections that a user has. Thus, the more important a user, the more information flows through them. Additionally, given two people, we will find the minimum number of mutual friends to connect them on Facebook. With enough time, we also hope to output a visualization of all user profiles and how they’re connected to each other within the Facebook egocentric network. 
+For this project, we are hoping to produce a Facebook profile search tool where users can input a user profile and receive their importance within the Facebook network. We define importance as the amount of social connections that a user has. Thus, the more important a user, the more information flows through them. We will use two measures of popularity to show this, in particular, a rank of how important the user is in the network as well as a percentage of how many connections the user is integral to in the network. With enough time, we also hope to output a visualization of all user profiles and how they’re connected to each other within the Facebook egocentric network. 
  
 ## Dataset Acquisition
  
 ## Data Format
-We will be using the ego-Facebook dataset from Stanford’s Large Network Dataset Collection (http://snap.stanford.edu/data/ego-Facebook.html).This dataset provides friend lists from survey participants so that each survey participant’s network is represented as an undirected graph. Each survey participant is represented as an ego node and there are over 4000 nodes representing their friends. We plan to use a random sample of 1000 participants and their specific features. In addition to this, their features / affiliations are provided, but the interpretation of those features have been obscured. For example, where the original dataset may have contained a feature "political=Democratic Party", the new data would simply contain "political=anonymized feature 1". Thus, it’s still possible to use this anonymized data to determine whether two users have the same political affiliations, but not what their individual political affiliations represent. However, if we want the user to be able to input a certain feature, we will have to label each of the feature ids. For example, the feature education year has an id of 542 and we would give that specific id a value of 1999. This may introduce bias because not all features may be represented within the dataset.
- 
+We will be using the ego-Facebook dataset from Stanford’s Large Network Dataset Collection (http://snap.stanford.edu/data/ego-Facebook.html).This dataset provides friend lists from survey participants so that each survey participant’s network is represented as an undirected graph. Each survey participant is represented as an ego node and there are over 4000 nodes representing their friends. We plan to use a random sample of ~1000 participants. 
 ## Data Correction
  
-The dataset features 10 people and their respective circles, to keep the size of our graph reasonable we will be picking one person and performing all the algorithms on that network. Due to the anonymized features, we will have to come up with some names for each feature id in order for a user to be able to input from a list of features and find an interest group. We will make sure that each line in our edge list has a starting and ending node, since this is an undirected graph, both nodes will have that edge in their edge list. If a line in the edge list does not have two values, then we won’t use that line as an edge. When building the feature list for a node, we will go through the feature list file & if there is a missing input for a feature, we will treat it as though that node/user doesn’t have that feature. During this stage, we will also map each feature id to a string in order for a user to be able to use our program with actual feature names rather than inputting feature ids.
+The dataset features 10 people and their respective circles, to keep the size of our graph reasonable we will be picking one person and performing all the algorithms on that network. To ensure the data is correct, we will check the text file with all the edges to ensure that there is no missing edge/incorrect edge. For example if a line only has one user id listed instead of 2, we will ignore that line. Since this is an undirected graph, we will add to the adjacency lists of both the edges listed in a given line.
  
 ## Data Storage
-We will use an undirected & unweighted graph to represent the friend circle. We will create a user class which will act as the nodes for our graph. Each node will have an i.d. and an array of features ( a feature represents an aspect of a user's profile like job, interests, location, etc). We are using an array in order to give each feature a unique id, and the feature array of a node will contain a 1 or 0 to signify whether a user has that feature or not. For example, if there is the feature “UIUC student” with id 9, then a ‘1’ in the 8th index of a user’s feature array will indicate they have this feature. We are picking an array over a linked list as it will allow us to access and compare whether users share two features in constant time at the cost of having a large features array. Lastly, we will have a preprocessed mapping of feature names as string to their unique feature id. This will let the user input an actual feature name rather than using an id that doesn’t mean anything. 
-	For an estimate of storage, let V be the number of nodes, E be the number of edges and F be the number of features. We need to store all the nodes and edges in addition to the number of features per node. We will also need to store the map of feature names to values, let M represent the space needed for this mapping. So, a Big O estimate for storage is:
- O(E + V * F + M)
+We will use an undirected & unweighted graph to represent the friend circle. We will create a user class which will act as the nodes for our graph. Each node will have an i.d to differentiate between each user. An edge between users signifies that the two users have friendship. We will use an adjacency list for our graph implementation as this simplifies things and lets us add a node (user) more easily to the graph. This method implementation is better storage wise since we don’t need to allocate space for edges that don’t exist like in an adjacency matrix.
+	For an estimate of storage, let V be the number of nodes and E be the number of edges. We need to store an user i.d. for each node and an adjacency list for each of these nodes . So, a Big O estimate for storage is:
+ O(V + E)
  
  
 ## Algorithm 
-#### 1) Bellman-Ford’s Algorithm  
+#### 1) PageRank Algorithm  
 ######Function Inputs: 
- The expected inputs for our algorithm would be two user ids. Our dataset currently is given as an adjacency list, however, which nodes are connected to which are already given. Thus, we would build our graphs with these nodes and then find the shortest connection between the two user ids.  
- 
+ The expected input for our algorithm would be all users. The PageRank algorithm can be used to rank nodes from most to least important, as it was originally created to rank webpages from most to least important. Thus, in this case, we can use the PageRank algorithm to rank users from most to least important, and specifically to give one user information about their importance within the network. 
 ######Function Outputs:  
-The expected output would be in the form of a string displaying the shortest edges that are traveled through to get to the end user-id. If time permits, we would also visualize the shortest connection and generate a PNG.  
+The expected output would be in the form of a list of userIds sorted from most to least important according to the PageRank algorithm. Based on this list, we could also implement features so that users can input one userID and receive back that user’s rank within their network, or that users could see the top 10 most important users. 
  
 ######Function Efficiency:  
-The target goal for time complexity would be O(V+E) where E represents the edges of the graph and V represents the nodes/vertices of the graph. This is because the algorithm relies on Breadth-first search, which will take O(V+E) time. Our estimated space complexity goal is O(V), where V denotes the number of nodes in the graph.
+The target goal for time complexity would be O(n^2 + cn^3), where n is the number of nodes, & c is the number of iterations, using Big-O this simplifies to O(n^3), we dropped the c since we have set a constant upper limit on the number of iterations. Building the Markov(or Google Matrix) for page rank takes O(n^2) time since we need to go through each node and then check how many nodes it is adjacent to to build one column of the matrix. for each iteration we use matrix multiplication which has a Big-O run time of O(n^3). 
+
+We will choose to iterate ~20 times or until the change between iterations is negligible(We can use can use the 2 norm of the difference between the initial and updated state vector for each iteration & when this value is below a certain tolerance we can stop the iteratons since we have reached a steady state). Our estimated space complexity goal is O(E), where e denotes the number of edges in the graph.
  
 ####2) Betweenness Centrality  
 ######Function Inputs:   
@@ -34,7 +33,7 @@ Betweenness centrality of a node refers to the number of times a node is in the 
 ######Function Outputs:  
 Our output will include the betweenness centrality value of the given node in the form of a percentage. This value is calculated by finding all of the shortest paths between two nodes and then finding which percent of those are required to pass through the given node. This can also give a sense of how “popular” the given user is as a high value means that they are aware and connected to multiple social networks. 
 ######Function Efficiency:  
-The goal time complexity for the degree centrality algorithm is O(V*E), where V is the number of vertices or users in the graph, and E is the number of edges or relationships in the graph. The goal space complexity is also O(V+E). 
+The goal time complexity for the degree centrality algorithm is O(V*E + V^2 log V), where V is the number of vertices or users in the graph, and E is the number of edges or relationships in the graph. The goal space complexity is also O(V+E). 
  
 #### 3) BFS Traversal
 ######Function Input:  
@@ -59,4 +58,3 @@ Finish first algorithm, create tests for proposed algorithms
 Finish other two algorithms
 ######	Week 5: 12/5 - 12/9:   
  Finalize and organize project deliverables, create Mediaspace video and write up 
-
