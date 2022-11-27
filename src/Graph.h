@@ -73,6 +73,16 @@ public:
     */
     int BetweennessCentrality();
 
+    /**
+     * Adds a vertex to the graph
+    */
+    void AddVertex(int id);
+
+    /**
+     * Adds an edge between two vertices
+    */
+    void AddEdge(int id1, int id2);
+    
     //uncomment this below if we do a visual output, we would also need to add 
     //225 PNG class/ add a lib folder with all the 225 stuff
     //PNG DrawGraph();
