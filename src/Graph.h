@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <list>
+#include <algorithm>
 
 using namespace std;
 
@@ -32,7 +33,7 @@ public:
      * @param id - ID of the vertex we want adj list for
      * @return - A std::list of Vertices that the passed Vertex is adj to
      *         - Empty list if Vertex is not connected
-     *         - Should throw error if the vertex doesn't exist
+     *         - list with -1 if vertex doesn't exist
     */
     list<Vertex> getAdjacencyList (int id);
 
@@ -89,7 +90,7 @@ public:
 
 private:
     // If our graph becomes too big to store on stack, we can make this into a pointer
-    mutable unordered_map<Vertex, list<Vertex>> adj_list;
+    mutable unordered_map<Vertex, list<Vertex>> *adj_list;
     // Size of graph/number of vertices
     int size;
 
