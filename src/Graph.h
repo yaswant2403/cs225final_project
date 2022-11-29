@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <list>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -20,13 +21,14 @@ public:
      * Default Constructor to create an empty graph.
     */
     Graph();
+    ~Graph();
 
     /**
      * Builds a graph from a file of edges.
      * Format should be two int ids seperated by space per line.
      * @param filename - the path of file from which to build the graph
     */
-    void BuildGraph(string filename);
+    void BuildGraph(const string & filename);
 
     /**
      * Return adjacency list of a Vertex with passed id
@@ -81,8 +83,14 @@ public:
 
     /**
      * Adds an edge between two vertices
+     * Since this is undirected, we add to both adj lists
     */
     void AddEdge(int id1, int id2);
+
+    /**
+     * Prints graph in adj list format for testing 
+    */
+    void print() const;
     
     //uncomment this below if we do a visual output, we would also need to add 
     //225 PNG class/ add a lib folder with all the 225 stuff

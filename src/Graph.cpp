@@ -6,7 +6,22 @@ Graph::Graph() {
     adj_list = new unordered_map<Vertex, list<Vertex>>();
 }
 
-void Graph::BuildGraph(string filename) {}
+Graph::~Graph() {
+    delete adj_list;
+}
+
+void Graph::BuildGraph(const string & filename) {
+    string file = file_to_string(filename);
+    vector<string> edges;
+    SplitString(file, '\n', edges);
+    for (auto edge : edges) {
+        vector<string> e;
+        SplitString(edge, ' ', e);
+        AddVertex(stoi(e.at(0)));
+        AddVertex(stoi(e.at(1)));
+        AddEdge(stoi(e.at(0)), stoi(e.at(1)));
+    }
+}
 
 list<Vertex> Graph::getAdjacencyList (Vertex id) {
     if (vertexExists(id)) {
@@ -33,11 +48,17 @@ int Graph::getSize() {
     return size;
 }
 
-list<Vertex> Graph::BFS() {}
+list<Vertex> Graph::BFS() {
+    return list<Vertex>();
+}
   
-list<Vertex> Graph::PageRank(int num_places = 10) {}
+list<Vertex> Graph::PageRank(int num_places) {
+    return list<Vertex>();
+}
 
-int Graph::BetweennessCentrality() {}
+int Graph::BetweennessCentrality() {
+    return 1;
+}
 
 void Graph::AddVertex(Vertex id) {
     if (!vertexExists(id)) {
@@ -51,4 +72,15 @@ void Graph::AddEdge(Vertex id1, Vertex id2) {
         adj_list->at(id1).push_back(id2);
         adj_list->at(id2).push_back(id1);
     }
+}
+
+void Graph::print() const {
+    for (auto it = adj_list->begin(); it != adj_list->end(); it++) {
+        cout << "Node " << it->first << " : ";
+        for (auto it2 = it->second.begin(); it2 != it->second.end(); it2++) {
+            cout << *it2 << ' ';
+        }
+        cout << endl;
+    }
+    cout << endl;
 }
