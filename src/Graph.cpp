@@ -53,7 +53,23 @@ list<Vertex> Graph::BFS() {
 }
   
 list<Vertex> Graph::PageRank(int num_places) {
-    return list<Vertex>();
+    list<Vertex> ranking;
+
+    // store a map of indices to the ID of each node make building Markov Matrix 
+    // & ranking list possible 
+
+    // Create Markov Matrix/Google PageRank Matrix of our graph which of 
+    // size n x n where n is size of graph/number of vertices
+
+    //Generate a normalized starting state vector of size n x 1
+
+    //Perform Matrix vector multiplication until change in vector between iterations is 
+    // under some tolerance/ we reach a specificed maximum number of iterations
+
+    // Take the indices of the largest num_places values and create ranking 
+    // If num_place > num vertices, then list will be of size num vertices
+
+    return ranking;
 }
 
 int Graph::BetweennessCentrality() {

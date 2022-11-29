@@ -66,10 +66,10 @@ public:
     list<Vertex> BFS();
     /**
      * Performs PageRank on our graph to see who the "most important/popular" person is
-     * @param num_places -How many places of rankings to return (eg top 5, 10, etc), default is top 10
+     * @param num_places -How many places of rankings to return (eg top 5, 10, etc)
      * @return -List of size num_places with the top num_places vertices in the graph according to PageRank
     */
-    list<Vertex> PageRank(int num_places = 10);
+    list<Vertex> PageRank(int num_places);
 
     /**
      * Performs BetweenessCentrality on our Graph
