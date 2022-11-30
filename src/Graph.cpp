@@ -19,6 +19,10 @@ void Graph::BuildGraph(const string & filename) {
     for (auto edge : edges) {
         vector<string> e;
         SplitString(edge, ' ', e);
+        // If the edge (no start & end node) then continue
+        if (e.size() != 2) {
+            continue;
+        }
         AddVertex(stoi(e.at(0)));
         AddVertex(stoi(e.at(1)));
         AddEdge(stoi(e.at(0)), stoi(e.at(1)));
@@ -51,15 +55,19 @@ int Graph::getSize() {
 }
 
 vector<Vertex> Graph::BFS() {
+    // Reset visited variable in case someone tries to do 2 BFS traversals
+    delete visited;
+    visited = new unordered_map<Vertex, bool>();
     // Grabs all vertices from adjlist ** Might make a separate private var to store all vertices **
     vector<Vertex> vertices;
     for (auto it = adj_list->begin(); it != adj_list->end(); ++it) {
         vertices.push_back(it->first);
+        visited->insert(make_pair(it->first, false));
     }
     vector<Vertex> output;
 
     // Does BFS on each vertex in vertices if vertex hasn't been visited yet
-    for (size_t idx = 0; idx < size; ++idx) {
+    for (size_t idx = 0; idx < vertices.size(); ++idx) {
         int vertex = vertices.at(idx);
         if (visited->find(vertex)->second == false) {
             BFSHelper(vertex, output);
