@@ -55,7 +55,7 @@ list<Vertex> Graph::BFS() {
 list<Vertex> Graph::PageRank(int num_places) {
     list<Vertex> ranking;
 
-    // map n indices to the ids of, can do this in the same step as building markov matrix 
+    // map n indices to the ids of nodes, can do this in the same step as building markov matrix 
     // store a map of indices to the ID of each node to make building Markov Matrix 
     // & ranking list possible 
 
