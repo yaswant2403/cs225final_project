@@ -44,30 +44,4 @@ TEST_CASE("Build Graph Dataset") {
     REQUIRE(g.edgeExists(819, 830));
 }
 
-TEST_CASE("BFS small & multiple") {
-    Graph g;
-    g.BuildGraph("../data/small_test.txt");
-    vector<Vertex> bfs = g.BFS();
-    //Double check that someone doing BFS more than once still returns same thing
-    vector<Vertex> bfs2 = g.BFS();
-    vector<Vertex> answer = {4, 9, 1, 2, 3};
-    REQUIRE(answer == bfs);
-    REQUIRE(answer == bfs2);
-}
-
-TEST_CASE("BFS Disconnected") {
-    Graph g;
-    g.BuildGraph("../data/disconnected.txt");
-    vector<Vertex> bfs = g.BFS();
-    vector<Vertex> answer = {6, 5, 4, 3, 2, 1}; 
-    REQUIRE(answer == bfs);
-}
-
-TEST_CASE("BFS Dataset") {
-    Graph g;
-    g.BuildGraph("../data/686.edges");
-    vector<Vertex> bfs = g.BFS();
-    size_t size = g.getSize();
-    REQUIRE(bfs.size() == size);
-}
 
