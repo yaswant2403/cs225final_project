@@ -61,11 +61,10 @@ class Graph
         int getSize();
 
         /**
-         * Performs BFS traversal of the graph
-         * @param id - Starting Vertex of BFS Traversal
+         * Performs BFS traversal of the graph including ALL components (connected and disconnected)
          * @returns - vector of Vertices in BFS order
         */
-        list<Vertex> BFS(Vertex id);
+        vector<Vertex> BFS();
         /**
          * Performs PageRank on our graph to see who the "most important/popular" person is
          * @param num_places -How many places of rankings to return (eg top 5, 10, etc)
@@ -99,6 +98,12 @@ class Graph
         //PNG DrawGraph();
 
     private:
+        /**
+         * Helper for BFS traversal of the graph
+         * @param - Starting Vertex ID
+         * @param - Reference of output list from BFS function
+        */
+        void BFSHelper(Vertex id, vector<Vertex>& out);
         // If our graph becomes too big to store on stack, we can make this into a pointer
         mutable unordered_map<Vertex, list<Vertex>> *adj_list;
         // change to pointer if too big to store on stack

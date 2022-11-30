@@ -8,6 +8,7 @@ Graph::Graph() {
 }
 
 Graph::~Graph() {
+    delete visited;
     delete adj_list;
 }
 
@@ -49,25 +50,46 @@ int Graph::getSize() {
     return size;
 }
 
-list<Vertex> Graph::BFS(Vertex id) {
+vector<Vertex> Graph::BFS() {
+    // Grabs all vertices from adjlist ** Might make a separate private var to store all vertices **
+    vector<Vertex> vertices;
+    for (auto it = adj_list->begin(); it != adj_list->end(); ++it) {
+        vertices.push_back(it->first);
+    }
+    vector<Vertex> output;
+
+    // Does BFS on each vertex in vertices if vertex hasn't been visited yet
+    for (size_t idx = 0; idx < size; ++idx) {
+        int vertex = vertices.at(idx);
+        if (visited->find(vertex)->second == false) {
+            BFSHelper(vertex, output);
+        }
+    }
+    return output;
+}
+
+void Graph::BFSHelper(Vertex id, vector<Vertex>& out) {
     queue<Vertex> q;
-    list<Vertex> output;
+    // enqueue starting node
     q.push(id);
     // setting starting node as visited
     visited->find(id)->second = true;
     while (!(q.empty())) {
+        // dequeue vertex
         int currVertex = q.front();
-        output.push_back(currVertex);
+        out.push_back(currVertex);
+        q.pop();
+
+        // Get currVertex Neighbors
         list<Vertex> currNeighbors = adj_list->find(currVertex)->second;
         for (auto neighbor : currNeighbors) {
-            // if vertex hasn't been visited AKA visited = false
+            // if vertex hasn't been visited AKA visited == false
             if (!visited->find(neighbor)->second) {
                 visited->find(neighbor)->second = true;
                 q.push(neighbor);
             }
         }
     }
-    return output;
 }
 
 list<Vertex> Graph::PageRank(int num_places) {
