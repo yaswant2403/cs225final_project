@@ -12,7 +12,6 @@ TEST_CASE("BuildGraph Small") {
     REQUIRE(g.vertexExists(3));
     REQUIRE(g.vertexExists(4));
     REQUIRE(g.vertexExists(9));
-    
 } 
 
 TEST_CASE("BuildGraph Disconnected") {

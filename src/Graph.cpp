@@ -4,6 +4,7 @@
 Graph::Graph() {
     size = 0;
     adj_list = new unordered_map<Vertex, list<Vertex>>();
+    visited = new unordered_map<Vertex, bool>();
 }
 
 Graph::~Graph() {
@@ -39,8 +40,8 @@ bool Graph::edgeExists(Vertex id1, Vertex id2) {
     if (!vertexExists(id1) || !vertexExists(id2)) {
         return false;
     } else {
-        list<Vertex> idl = adj_list->find(id1)->second;
-        return !(find(idl.begin(), idl.end(), id2) == idl.end());
+        list<Vertex> v1_neighbors = adj_list->find(id1)->second;
+        return !(find(v1_neighbors.begin(), v1_neighbors.end(), id2) == v1_neighbors.end());
     }
 }
 
@@ -48,10 +49,27 @@ int Graph::getSize() {
     return size;
 }
 
-list<Vertex> Graph::BFS() {
-    return list<Vertex>();
+list<Vertex> Graph::BFS(Vertex id) {
+    queue<Vertex> q;
+    list<Vertex> output;
+    q.push(id);
+    // setting starting node as visited
+    visited->find(id)->second = true;
+    while (!(q.empty())) {
+        int currVertex = q.front();
+        output.push_back(currVertex);
+        list<Vertex> currNeighbors = adj_list->find(currVertex)->second;
+        for (auto neighbor : currNeighbors) {
+            // if vertex hasn't been visited AKA visited = false
+            if (!visited->find(neighbor)->second) {
+                visited->find(neighbor)->second = true;
+                q.push(neighbor);
+            }
+        }
+    }
+    return output;
 }
-  
+
 list<Vertex> Graph::PageRank(int num_places) {
     list<Vertex> ranking;
     unordered_map<int, Vertex> idx_map;
@@ -88,6 +106,7 @@ int Graph::BetweennessCentrality() {
 void Graph::AddVertex(Vertex id) {
     if (!vertexExists(id)) {
         adj_list->insert(make_pair(id, list<Vertex>()));
+        visited->insert(make_pair(id, false));
         size++;
     }
 }
