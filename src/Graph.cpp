@@ -146,8 +146,15 @@ void Graph::AddEdge(Vertex id1, Vertex id2) {
     }
 }
 
-vector<Vertex> getDisconnectedNodes() {
-    return vector<Vertex>();
+vector<Vertex> Graph::getDisconnectedNodes() {
+    vector<Vertex> vertices = getAllVertices();
+    vector<Vertex> result;
+    for (auto v : vertices) {
+        if (adj_list->find(v)->second.size() <= 1) {
+            result.push_back(v);
+        }
+    }
+    return result;
 }
 
 void Graph::print() const {
