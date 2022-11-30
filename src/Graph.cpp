@@ -55,6 +55,7 @@ list<Vertex> Graph::BFS() {
 list<Vertex> Graph::PageRank(int num_places) {
     list<Vertex> ranking;
 
+    // map n indices to the ids of, can do this in the same step as building markov matrix 
     // store a map of indices to the ID of each node to make building Markov Matrix 
     // & ranking list possible 
 
@@ -66,6 +67,7 @@ list<Vertex> Graph::PageRank(int num_places) {
     //Perform Matrix vector multiplication until change in vector between iterations is 
     // under some tolerance/ we reach a specificed maximum number of iterations
 
+    //Sort the indices of the output vector from largest to smallest & pull the ids of these indices from the map 
     // Take the indices of the largest num_places values and create ranking 
     // If num_place > num vertices, then list will be of size num vertices
 
