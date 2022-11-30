@@ -147,5 +147,6 @@ catch_discover_tests(test)
 #Uncomment link libraries line if we end up using cs225 lib with png, etc
 foreach(entrypoint IN LISTS assignment_entrypoints)
     add_executable(${entrypoint} ${entry_dir}/${entrypoint}.cpp)
-    #target_link_libraries(${entrypoint} PRIVATE libs src)
+    # target_link_libraries(${entrypoint} PRIVATE libs src) if using c225 lib
+    target_link_libraries(${entrypoint} PRIVATE src)
 endforeach()
