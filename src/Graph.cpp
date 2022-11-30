@@ -54,16 +54,23 @@ list<Vertex> Graph::BFS() {
   
 list<Vertex> Graph::PageRank(int num_places) {
     list<Vertex> ranking;
-
+    unordered_map<int, Vertex> idx_map;
     // map n indices to the ids of nodes, can do this in the same step as building markov matrix 
     // store a map of indices to the ID of each node to make building Markov Matrix 
     // & ranking list possible 
 
     // Create Markov Matrix/Google PageRank Matrix of our graph which of 
     // size n x n where n is size of graph/number of vertices
+    int i = 0;
+    for (auto it = adj_list->begin(); it != adj_list->end(); it++) {
+        idx_map.insert(make_pair(i, it->first));
+        // Build out Markov Matrix 
 
+        i++;
+    }
+    
     // Generate a normalized starting state vector of size n x 1
-
+    
     //Perform Matrix vector multiplication until change in vector between iterations is 
     // under some tolerance/ we reach a specificed maximum number of iterations
 

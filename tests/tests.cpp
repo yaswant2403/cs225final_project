@@ -12,6 +12,7 @@ TEST_CASE("BuildGraph Small") {
     REQUIRE(g.vertexExists(3));
     REQUIRE(g.vertexExists(4));
     REQUIRE(g.vertexExists(9));
+    
 } 
 
 TEST_CASE("BuildGraph Disconnected") {
@@ -34,4 +35,12 @@ TEST_CASE("BuildGraph Disconnected") {
     REQUIRE_FALSE(g.edgeExists(6, 1));
     REQUIRE_FALSE(g.edgeExists(6, 2));
     REQUIRE_FALSE(g.edgeExists(6, 3));
+}
+
+TEST_CASE("Build Graph Dataset") {
+    Graph g;
+    g.BuildGraph("../data/686.edges");
+    REQUIRE(g.getSize() == 168);
+    REQUIRE(g.edgeExists(830, 819));
+    REQUIRE(g.edgeExists(819, 830));
 }
