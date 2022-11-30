@@ -64,8 +64,14 @@ int Graph::getSize() {
 }
 
 vector<Vertex> Graph::BFS() {
+    // Reset visited incase someone does BFS twice
+    delete visited;
+    visited = new unordered_map<Vertex, bool>();
     // Grabs all vertices
     vector<Vertex> vertices = getAllVertices();
+    for (auto v : vertices) {
+        visited->insert(make_pair(v, false));
+    }
     vector<Vertex> output;
 
     // Does BFS on each vertex in vertices if vertex hasn't been visited yet
