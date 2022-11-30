@@ -12,6 +12,7 @@ Graph::~Graph() {
     delete adj_list;
 }
 
+// Doesn't account for disconnected component with no edges
 void Graph::BuildGraph(const string & filename) {
     string file = file_to_string(filename);
     vector<string> edges;
@@ -23,6 +24,14 @@ void Graph::BuildGraph(const string & filename) {
         AddVertex(stoi(e.at(1)));
         AddEdge(stoi(e.at(0)), stoi(e.at(1)));
     }
+}
+
+vector<Vertex> Graph::getAllVertices() {
+    vector<Vertex> vertices;
+    for (auto it = adj_list->begin(); it != adj_list->end(); ++it) {
+        vertices.push_back(it->first);
+    }
+    return vertices;
 }
 
 list<Vertex> Graph::getAdjacencyList (Vertex id) {
@@ -51,15 +60,12 @@ int Graph::getSize() {
 }
 
 vector<Vertex> Graph::BFS() {
-    // Grabs all vertices from adjlist ** Might make a separate private var to store all vertices **
-    vector<Vertex> vertices;
-    for (auto it = adj_list->begin(); it != adj_list->end(); ++it) {
-        vertices.push_back(it->first);
-    }
+    // Grabs all vertices
+    vector<Vertex> vertices = getAllVertices();
     vector<Vertex> output;
 
     // Does BFS on each vertex in vertices if vertex hasn't been visited yet
-    for (size_t idx = 0; idx < size; ++idx) {
+    for (int idx = 0; idx < size; ++idx) {
         int vertex = vertices.at(idx);
         if (visited->find(vertex)->second == false) {
             BFSHelper(vertex, output);
@@ -138,6 +144,10 @@ void Graph::AddEdge(Vertex id1, Vertex id2) {
         adj_list->at(id1).push_back(id2);
         adj_list->at(id2).push_back(id1);
     }
+}
+
+vector<Vertex> getDisconnectedNodes() {
+    return vector<Vertex>();
 }
 
 void Graph::print() const {

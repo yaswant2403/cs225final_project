@@ -32,6 +32,12 @@ class Graph
         void BuildGraph(const string & filename);
 
         /**
+         * Return all Vertices of graph
+         * @return - A std::vector of Vertices in graph
+        */
+        vector<Vertex> getAllVertices();
+
+        /**
          * Return adjacency list of a Vertex with passed id
          * @param id - ID of the vertex we want adj list for
          * @return - A std::list of Vertices that the passed Vertex is adj to
@@ -65,6 +71,13 @@ class Graph
          * @returns - vector of Vertices in BFS order
         */
         vector<Vertex> BFS();
+
+        /**
+         * Helper for BFS traversal of the graph
+         * @param - Starting Vertex ID
+         * @param - Reference of output list from BFS function
+        */
+        void BFSHelper(Vertex id, vector<Vertex>& out);
         /**
          * Performs PageRank on our graph to see who the "most important/popular" person is
          * @param num_places -How many places of rankings to return (eg top 5, 10, etc)
@@ -97,15 +110,12 @@ class Graph
         //225 PNG class/ add a lib folder with all the 225 stuff
         //PNG DrawGraph();
 
+        vector<Vertex> getDisconnectedNodes();
+
     private:
-        /**
-         * Helper for BFS traversal of the graph
-         * @param - Starting Vertex ID
-         * @param - Reference of output list from BFS function
-        */
-        void BFSHelper(Vertex id, vector<Vertex>& out);
+
         // If our graph becomes too big to store on stack, we can make this into a pointer
-        mutable unordered_map<Vertex, list<Vertex>> *adj_list;
+        mutable unordered_map<Vertex, list<Vertex>>* adj_list;
         // change to pointer if too big to store on stack
         mutable unordered_map<Vertex, bool>* visited;
         // Size of graph which we define to be number of vertices
