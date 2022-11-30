@@ -73,7 +73,7 @@ class Graph
         vector<Vertex> BFS();
 
         /**
-         * Helper for BFS traversal of the graph
+         * Helper for BFS traversal of the graph used for testing
          * @param - Starting Vertex ID
          * @param - Reference of output list from BFS function
         */
@@ -106,12 +106,14 @@ class Graph
         */
         void print() const;
         
+        /**
+         * Gets any nodes that are completely disconnected from other nodes for testing 
+        */
+        vector<Vertex> getDisconnectedNodes();
+
         //uncomment this below if we do a visual output, we would also need to add 
         //225 PNG class/ add a lib folder with all the 225 stuff
         //PNG DrawGraph();
-
-        vector<Vertex> getDisconnectedNodes();
-
     private:
 
         // If our graph becomes too big to store on stack, we can make this into a pointer

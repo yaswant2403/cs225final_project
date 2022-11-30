@@ -115,6 +115,8 @@ list<Vertex> Graph::PageRank(int num_places) {
     // store a map of indices to the ID of each node to make building Markov Matrix 
     // & ranking list possible 
 
+    //Perhaps store a file with adj matrix for our dataset to avoid having to rebuild 
+
     // Create Markov Matrix/Google PageRank Matrix of our graph which of 
     // size n x n where n is size of graph/number of vertices
     int i = 0;

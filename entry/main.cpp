@@ -6,14 +6,24 @@ using namespace std;
 int main() {
     Graph g;
     g.BuildGraph("../data/686.edges");
-    g.print();
+    // g.print();
 
     // Using to check that bfs got these nodes
-    vector<Vertex> disc = g.getDisconnectedNodes();
-    cout << endl;
-    for (auto v : disc) {
-        cout << v << " ";
-    }
+    //vector<Vertex> disc = g.getDisconnectedNodes();
+    //cout << endl;
+    //for (auto v : disc) {
+    //    cout << v << " ";
+    //}
     vector<Vertex> bfs = g.BFS();
+    int i = 0;
+    for (auto e : bfs) {
+        cout << e << " ";
+        i++;
+        if (i == 10) {
+            cout << endl;
+            i = 0;
+        }
+    }
+    cout << endl;
     return 0;
 }
