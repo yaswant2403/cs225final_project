@@ -14,16 +14,16 @@ int main() {
     //for (auto v : disc) {
     //    cout << v << " ";
     //}
-    vector<Vertex> bfs = g.BFS();
-    int i = 0;
-    for (auto e : bfs) {
-        cout << e << " ";
-        i++;
-        if (i == 10) {
-            cout << endl;
-            i = 0;
-        }
-    }
-    cout << endl;
+    //vector<Vertex> bfs = g.BFS();
+    //int i = 0;
+    //for (auto e : bfs) {
+    //    cout << e << " ";
+    //    i++;
+    //    if (i == 10) {
+    //        cout << endl;
+    //        i = 0;
+    //    }
+    //}
+    //cout << endl;
     return 0;
 }

@@ -2,6 +2,10 @@
 
 #include "Graph.h"
 
+/**
+ * Test cases for our abstract data types/ classes
+ * Tests for Graph & Matrix are here 
+*/
 
 TEST_CASE("BuildGraph Small") {
     Graph g;

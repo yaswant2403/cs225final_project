@@ -22,6 +22,10 @@ class Graph
          * Default Constructor to create an empty graph.
         */
         Graph();
+
+        /**
+         * Destructor
+        */
         ~Graph();
 
         /**
