@@ -23,17 +23,7 @@ public:
      * Copy constructor
     */
     Matrix(const Matrix& other);
-
-    /**
-     * Matrix Addition operator, adds two matrices together
-    */
-    //Matrix operator+(Matrix& other);
-
-    /**
-     * Matrix Subtraction operator, subtracts two matrices
-    */
-    //Matrix operator-(Matrix& other);
-
+    
     /**
      * Matrix Multiplication operator, 
     */

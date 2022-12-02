@@ -12,6 +12,7 @@ Matrix::Matrix(const Matrix& other){
     matrix = vector<vector<double>>(rows, vector<double>(cols));
     copy(other.matrix.begin(), other.matrix.end(), matrix.begin());
 }
+
 Matrix Matrix::operator*(Matrix& other){
     Matrix m(rows, other.getCols(), 0);
     if (cols != other.getRows()) {
