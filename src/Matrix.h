@@ -2,7 +2,6 @@
 
 #include <vector>
 #include <cmath>
-#include <algorithm>
 #include <iostream>
 
 using namespace std;
@@ -22,12 +21,34 @@ public:
     /**
      * Copy constructor
     */
+    //Delete as probably not needed, see if needed during pagerank, otherwise delete
     Matrix(const Matrix& other);
-    
+
     /**
-     * Matrix Multiplication operator, 
+     * Matrix Addition Operator
+    */
+    Matrix operator+(Matrix& other);
+
+    /**
+     * Matrix Subtraction Operator
+    */
+    Matrix operator-(Matrix& other);
+
+    /**
+     * Matrix Multiplication operator
     */
     Matrix operator*(Matrix& other);
+
+    /**
+     * Matrix Scaling operator
+     * Note scalar needs to be a named variable
+    */
+    Matrix operator*(double& scalar);
+
+    /**
+     * Other Matrix scaling operator 
+    */
+    friend Matrix operator*(double& scalar, const Matrix& other);
 
     /**
      * Use for element access in the matrix, for example Matrix(9, 9) will return 
@@ -56,8 +77,12 @@ public:
     void print() const;
     
 private:
+    //Number of rows in this matrix
     unsigned rows;
+    //Number of cols in this matrix
     unsigned cols;
+    //2D vector used to store the matrix values
     vector<vector<double>> matrix;
 };
+
 

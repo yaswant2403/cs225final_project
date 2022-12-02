@@ -1,5 +1,6 @@
 #include "Graph.h"
 #include "utils.h"
+#include "Matrix.h"
 
 Graph::Graph() {
     size = 0;
@@ -13,6 +14,7 @@ Graph::~Graph() {
 }
 
 // Doesn't account for disconnected component with no edges
+// Can assume for our purpose that no single node will be disconnected
 void Graph::BuildGraph(const string & filename) {
     string file = file_to_string(filename);
     vector<string> edges;
@@ -108,7 +110,13 @@ void Graph::BFSHelper(Vertex id, vector<Vertex>& out) {
     }
 }
 
-list<Vertex> Graph::PageRank(int num_places) {
+list<Vertex> Graph::PageRank(int num_places, double alpha) {
+    // Handle cases of bad alpha values
+    if (alpha > 1) {
+        alpha = 1;
+    } else if (alpha < 0) {
+        alpha = 0;
+    }
     list<Vertex> ranking;
     unordered_map<int, Vertex> idx_map;
     // map n indices to the ids of nodes, can do this in the same step as building markov matrix 
@@ -117,7 +125,8 @@ list<Vertex> Graph::PageRank(int num_places) {
 
     //Perhaps store a file with adj matrix for our dataset to avoid having to rebuild 
 
-    // Create Markov Matrix/Google PageRank Matrix of our graph which of 
+    // Create Google PageRank Matrix of our graph which of 
+    //
     // size n x n where n is size of graph/number of vertices
     int i = 0;
     for (auto it = adj_list->begin(); it != adj_list->end(); it++) {

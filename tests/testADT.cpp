@@ -8,6 +8,10 @@
  * Tests for Graph & Matrix are here 
 */
 
+/**
+ * Test cases for Graph 
+*/
+
 TEST_CASE("BuildGraph Small") {
     Graph g;
     g.BuildGraph("../data/small_test.txt");
@@ -98,4 +102,41 @@ TEST_CASE("Matrix Vector Multiplication", "[matrix]") {
     x(1, 0) = 33;
     x(2, 0) = 30;
     REQUIRE(M * v == x);
+}
+
+TEST_CASE("Matrix Scaling", "[matrix]") {
+    Matrix A(3, 3, 1);
+    double s = 1/3;
+    Matrix B = s * A;
+    Matrix D = A * s;
+    Matrix C(3, 3, 1/3);
+    REQUIRE(B == C);
+    REQUIRE(B == D);
+    REQUIRE(D == C);
+} 
+
+TEST_CASE("Matrix Addition", "[matrix]") {
+    Matrix A(3, 3, 9);
+    Matrix B(3, 3, 10);
+    Matrix C(3, 3, 19);
+    REQUIRE(A + B == C);
+    REQUIRE(B + A == C);
+}
+
+TEST_CASE("Matrix Subtraction", "[matrix]") {
+    Matrix A(3, 3, 9);
+    Matrix B(3, 3, 10);
+    Matrix C(3, 3, 19);
+    Matrix D(3, 3, -9);
+    REQUIRE(C - B == A);
+    REQUIRE(B - C == D);
+}
+
+TEST_CASE("Matrix +/- Invalid", "[matrix]") {
+    Matrix A(3, 3, 9);
+    Matrix B(3, 1, 9);
+    REQUIRE_THROWS(A + B);
+    REQUIRE_THROWS(A - B);
+    REQUIRE_THROWS(B + A);
+    REQUIRE_THROWS(B - A);
 }

@@ -85,9 +85,13 @@ class Graph
         /**
          * Performs PageRank on our graph to see who the "most important/popular" person is
          * @param num_places -How many places of rankings to return (eg top 5, 10, etc)
+         * @param alpha - The dampening factor for the PageRank Matrix, defaults to 0.85, this value must be 
+         *  a probablity, e.g. a number 0 to 1
+         *  Dampening factor is the "The probability, at any step, that the person will continue is a damping factor d."
+         *  https://en.wikipedia.org/wiki/PageRank#Damping_factor 
          * @return -List of size num_places with the top num_places vertices in the graph according to PageRank
         */
-        list<Vertex> PageRank(int num_places);
+        list<Vertex> PageRank(int num_places, double alpha=0.85);
 
         /**
          * Performs BetweenessCentrality on our Graph
