@@ -3,8 +3,10 @@
 #include <vector>
 #include <cmath>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
+
 /**
  * Very Basic Matrix class for use in PageRank
 */
