@@ -1,6 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "Graph.h"
+#include "Matrix.h"
 
 /**
  * Test cases for our abstract data types/ classes
@@ -48,4 +49,53 @@ TEST_CASE("Build Graph Dataset") {
     REQUIRE(g.edgeExists(819, 830));
 }
 
+/**
+ * Test Cases for Matrix class 
+*/
 
+TEST_CASE("Basic Matrix Construction & functions", "[matrix]") {
+    Matrix m(3, 3, 9);
+    //m.print();
+    REQUIRE(m(0, 0) == 9);
+    REQUIRE(m.getCols() == 3);
+    REQUIRE(m.getRows() == 3);
+}
+
+TEST_CASE("Operator== sanity check", "[matrix]") {
+    Matrix A(3, 3, 9);
+    Matrix B(3, 3, 9);
+    REQUIRE(A == B);
+    Matrix C(3, 3, 2);
+    REQUIRE_FALSE(A == C);
+    Matrix D(3, 1, 9);
+    REQUIRE_FALSE(A == D);
+    REQUIRE_FALSE(C == D);
+}
+
+TEST_CASE("Square Matrix Matrix Multiplication", "[matrix]") {
+    Matrix A(2, 2, 2);
+    Matrix B(2, 2, 9);
+    Matrix C = A * B;
+    Matrix D(2, 2, 36);
+    REQUIRE(C == D);
+}
+
+TEST_CASE("Bad Matrix Multiplication Dimensions", "[matrix]") {
+    Matrix A(3, 2, 9);
+    Matrix B(9, 3, 9);
+    REQUIRE_THROWS(A * B);
+}
+
+TEST_CASE("Matrix Vector Multiplication", "[matrix]") {
+    Matrix M(3, 3, 9);
+    M(0, 0) = 3;
+    M(1, 0) = 2;
+    M(2, 0) = 1;
+    Matrix v(3, 1, 3);
+    v(1, 0) = 2;
+    v(2, 0) = 1;
+    Matrix x(3, 1, 36);
+    x(1, 0) = 33;
+    x(2, 0) = 30;
+    REQUIRE(M * v == x);
+}

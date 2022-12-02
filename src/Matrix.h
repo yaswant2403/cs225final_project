@@ -27,12 +27,12 @@ public:
     /**
      * Matrix Addition operator, adds two matrices together
     */
-    Matrix operator+(Matrix& other);
+    //Matrix operator+(Matrix& other);
 
     /**
      * Matrix Subtraction operator, subtracts two matrices
     */
-    Matrix operator-(Matrix& other);
+    //Matrix operator-(Matrix& other);
 
     /**
      * Matrix Multiplication operator, 
@@ -44,6 +44,21 @@ public:
      * the entry at row 9 column 9
     */
     double& operator()(const unsigned &row, const unsigned &col);
+
+    /**
+     * Operator == to help with testing, sees if all elements of matrix are the same 
+    */
+    bool operator==(const Matrix& rhs) const;
+
+    /**
+     * Gets cols from Matrix
+    */
+    unsigned getCols() const;
+
+    /**
+     * Get rows from matrix
+    */
+    unsigned getRows() const;
 
     /**
      * Prints the Matrix, used for testing 
