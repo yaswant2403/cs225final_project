@@ -97,16 +97,24 @@ class Graph
         list<Vertex> PageRank(int num_places, double alpha=0.85);
 
         /**
-         * Performs BetweenessCentrality on our Graph to see who the most important people are in the network
+         * Displays most popular users/vertices in graph based on betweenness centrality
          * @param num_places - How many places of rankings to return (eg: top 5, 10, etc.)
          * @return void - prints out num_places number of vertices / users and their betweenness centrality value
         */
         void BetweennessCentrality(int num_places);
- 
+
         /**
-         * Gives Betweenness Centrality value for one user
+         * Performs BetweenessCentrality on our Graph to see who the most important people are in the network
+         * Uses Brandes's algorithm: http://snap.stanford.edu/class/cs224w-readings/brandes01centrality.pdf
+         * @return - vector of all vertices' betweenness centrality values
+        */
+        vector<std::pair<Vertex, int>> calculateBetweennessCentrality();
+
+
+        /**
+         * returns Betweenness Centrality value for one user
          * @param id - vertex ID for user
-         * @return - gives number representing percentage of how many shortest paths the vertex is
+         * @return - number representing percentage of how many shortest paths in network user is part of
         */
         int getUserBetweennessCentrality(int id);
 

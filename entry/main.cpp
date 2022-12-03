@@ -25,5 +25,9 @@ int main() {
     //    }
     //}
     //cout << endl;
+
+    //g.BetweennessCentrality(5);
+    //cout << g.getUserBetweennessCentrality(825) << "%" << endl;
+    
     return 0;
 }
