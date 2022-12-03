@@ -19,7 +19,7 @@ We will use an undirected & unweighted graph to represent the friend circle. We 
 #### 1) PageRank Algorithm  
 ###### Function Inputs: 
  The expected input for our algorithm would be all users. The PageRank algorithm can be used to rank nodes from most to least important, as it was originally created to rank webpages from most to least important. Thus, in this case, we can use the PageRank algorithm to rank users from most to least important, and specifically to give one user information about their importance within the network. 
-######Function Outputs:  
+###### Function Outputs:  
 The expected output would be in the form of a list of userIds sorted from most to least important according to the PageRank algorithm. Based on this list, we could also implement features so that users can input one userID and receive back that user’s rank within their network, or that users could see the top 10 most important users. 
  
 ###### Function Efficiency:  
