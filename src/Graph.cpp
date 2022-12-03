@@ -1,6 +1,5 @@
 #include "Graph.h"
 #include "utils.h"
-#include "Matrix.h"
 
 Graph::Graph() {
     size = 0;
@@ -119,33 +118,77 @@ list<Vertex> Graph::PageRank(int num_places, double alpha) {
     }
     list<Vertex> ranking;
     unordered_map<int, Vertex> idx_map;
-    // map n indices to the ids of nodes, can do this in the same step as building markov matrix 
-    // store a map of indices to the ID of each node to make building Markov Matrix 
-    // & ranking list possible 
-
-    //Perhaps store a file with adj matrix for our dataset to avoid having to rebuild 
-
-    // Create Google PageRank Matrix of our graph which of 
-    //
-    // size n x n where n is size of graph/number of vertices
+    unordered_map<Vertex, int> reverse_idx;
+    // map n indices to the ids of nodes, store a map of indices to the ID of each node 
+    // to make building Markov Matrix & ranking list possible 
     int i = 0;
     for (auto it = adj_list->begin(); it != adj_list->end(); it++) {
         idx_map.insert(make_pair(i, it->first));
-        // Build out Markov Matrix 
-
+        reverse_idx.insert(make_pair(it->first, i));
         i++;
     }
-    
+    // Make Adjacency/Markov Matrix 
+    Matrix M = makeAdjMatrix(reverse_idx);
+
+    // Create Google PageRank Matrix of our graph which of 
+    // size n x n where n is size of graph/number of vertices
+    // G = alpha * M + ((1-alpha) / n * 1)
+    // Where M is Markov adjacency matrix & 1 is a matrix of all ones
+    Matrix ones(size, size, 1.0);
+    double ones_coeff = (1 - alpha) / size;
+    Matrix aM = alpha * M;
+    Matrix O = ones_coeff * ones;
+    Matrix G = aM + O;
+
     // Generate a normalized starting state vector of size n x 1
-    
+    Matrix x0(size, 1, 0);
+    x0(0, 0) = 1;
     //Perform Matrix vector multiplication until change in vector between iterations is 
     // under some tolerance/ we reach a specificed maximum number of iterations
-
+    // TODO: Add loop break if the change in vectors is under a certain tolerance
+    for (int i = 0; i < 20; i++) {
+        Matrix x = G * x0;
+        double norm = 0.0;
+        for (unsigned j = 0; j < x.getRows(); j++) {
+            norm += abs(x(j, 0));
+        }
+        norm = 1 /norm;
+        x0 = x * norm;
+    }
+    
     //Sort the indices of the output vector from largest to smallest & pull the ids of these indices from the map 
     // Take the indices of the largest num_places values and create ranking 
     // If num_place > num vertices, then list will be of size num vertices
-
+    vector<int> ranks(x0.getRows());
+    iota(ranks.begin(), ranks.end(), 0);
+    stable_sort(ranks.begin(), ranks.end(), [&](int i, int j){return x0(i, 0) > x0(j, 0);});
+    for (auto i = 0; i < min(num_places, size); i++) {
+        ranking.push_back(idx_map.find(ranks.at(i))->second);
+    }
     return ranking;
+}
+
+Matrix Graph::makeAdjMatrix(unordered_map<Vertex, int>& reverse_idx) {
+    Matrix M(size, size, 0);
+    for (auto it = adj_list->begin(); it != adj_list->end(); it++) {
+        list<Vertex> V = it->second;
+        Vertex col = reverse_idx.find(it->first)->second;
+
+        double value;
+        double sz = V.size();
+
+        if (V.size() == 0) {
+            value = 1 / size;
+        } else {
+            value = 1 / sz;
+        }
+    
+        for (Vertex node : V) {
+            Vertex row = reverse_idx.find(node)->second;
+            M(row, col) = value;
+        }
+    }
+    return M;
 }
 
 int Graph::BetweennessCentrality() {

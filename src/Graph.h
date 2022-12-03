@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Matrix.h"
+
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -7,6 +9,7 @@
 #include <vector>
 #include <queue>
 #include <algorithm>
+#include <numeric>
 
 using namespace std;
 
@@ -123,7 +126,11 @@ class Graph
         //225 PNG class/ add a lib folder with all the 225 stuff
         //PNG DrawGraph();
     private:
-
+        /**
+         * Create Normalized Adjacency Matrix where all columns have a norm of 1
+         * Meaning the sum of column / non zero elements == 1
+        */
+        Matrix makeAdjMatrix(unordered_map<Vertex, int>& reverse_idx);
         // If our graph becomes too big to store on stack, we can make this into a pointer
         mutable unordered_map<Vertex, list<Vertex>>* adj_list;
         // change to pointer if too big to store on stack

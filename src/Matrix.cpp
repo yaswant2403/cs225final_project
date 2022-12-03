@@ -6,13 +6,6 @@ Matrix::Matrix(unsigned row, unsigned col, double init) {
     cols = col;
     matrix = vector<vector<double>>(row, vector<double>(col, init));
 }
-//Delete as probably not needed, see if needed during pagerank, otherwise delete
-Matrix::Matrix(const Matrix& other){
-    rows = other.rows;
-    cols = other.cols;
-    matrix = vector<vector<double>>(rows, vector<double>(cols));
-    copy(other.matrix.begin(), other.matrix.end(), matrix.begin());
-}
 
 // Operator functions
 

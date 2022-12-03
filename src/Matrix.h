@@ -19,12 +19,6 @@ public:
     Matrix(unsigned row, unsigned col, double init=0);
 
     /**
-     * Copy constructor
-    */
-    //Delete as probably not needed, see if needed during pagerank, otherwise delete
-    Matrix(const Matrix& other);
-
-    /**
      * Matrix Addition Operator
     */
     Matrix operator+(Matrix& other);

@@ -140,3 +140,24 @@ TEST_CASE("Graph from Dataset - BFS Traversal","[algo][BFS]") {
     // should contain all the vertices (even disconnected)
     REQUIRE(int(bfs.size()) == g.getSize());
 }
+
+/**
+ * Tests for PageRank Algo
+*/
+TEST_CASE("Small Connected PageRank", "[algo][PG]") {
+    Graph g;
+    g.BuildGraph("../data/small_test.txt");
+    list<Vertex> rank = g.PageRank(10);
+}
+
+TEST_CASE("Small Disconnected PageRank", "[algo][PG]") {
+
+}
+
+TEST_CASE("Graph from DataSet test", "[algo][PG]") {
+
+}
+
+/**
+ * Tests for Betweeness Centrality
+*/
