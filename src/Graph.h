@@ -97,9 +97,18 @@ class Graph
         list<Vertex> PageRank(int num_places, double alpha=0.85);
 
         /**
-         * Performs BetweenessCentrality on our Graph
+         * Performs BetweenessCentrality on our Graph to see who the most important people are in the network
+         * @param num_places - How many places of rankings to return (eg: top 5, 10, etc.)
+         * @return void - prints out num_places number of vertices / users and their betweenness centrality value
         */
-        int BetweennessCentrality();
+        void BetweennessCentrality(int num_places);
+ 
+        /**
+         * Gives Betweenness Centrality value for one user
+         * @param id - vertex ID for user
+         * @return - gives number representing percentage of how many shortest paths the vertex is
+        */
+        int getUserBetweennessCentrality(int id);
 
         /**
          * Adds a vertex to the graph

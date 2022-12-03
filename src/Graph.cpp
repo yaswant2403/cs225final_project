@@ -191,8 +191,12 @@ Matrix Graph::makeAdjMatrix(unordered_map<Vertex, int>& reverse_idx) {
     return M;
 }
 
-int Graph::BetweennessCentrality() {
-    return 1;
+void Graph::BetweennessCentrality(int num_places) {
+    
+}
+
+int Graph::getUserBetweennessCentrality(int id) {
+    return id;
 }
 
 void Graph::AddVertex(Vertex id) {
