@@ -70,6 +70,7 @@ vector<Vertex> Graph::BFS() {
     visited = new unordered_map<Vertex, bool>();
     // Grabs all vertices
     vector<Vertex> vertices = getAllVertices();
+   
     for (auto v : vertices) {
         visited->insert(make_pair(v, false));
     }
@@ -192,12 +193,31 @@ Matrix Graph::makeAdjMatrix(unordered_map<Vertex, int>& reverse_idx) {
 }
 
 void Graph::BetweennessCentrality(int num_places) {
+    vector<std::pair<Vertex, int>> bc;
+    //get BC for each vertice
+    for (auto v : getAllVertices()) {
+        bc.push_back(std::make_pair(v, getUserBetweennessCentrality(v)));
+    }
+    //sort vector based on BC value
+    std::stable_sort(bc.begin(), bc.end(), [](auto &one, auto &two) {
+        return one.second > two.second;
+    });
     
+    //output rankings
+    cout << "BETWEENNESS CENTRALITY RANKINGS:" << endl; 
+    cout << "BC represents the percentage of shortest paths of all pairs in the network that the user is part of" << endl;
+    for (int i = 0; i < num_places; ++i) {
+        cout << "#" << (i+1) << ". " << bc[i].first;
+        cout << ", BC: " << bc[i].second << "%" << endl;
+    }
 }
 
 int Graph::getUserBetweennessCentrality(int id) {
+    //temp return, obviously wrong rn
     return id;
 }
+
+
 
 void Graph::AddVertex(Vertex id) {
     if (!vertexExists(id)) {
