@@ -104,19 +104,20 @@ class Graph
         void BetweennessCentrality(int num_places);
 
         /**
-         * Performs BetweenessCentrality on our Graph to see who the most important people are in the network
-         * Uses Brandes's algorithm: http://snap.stanford.edu/class/cs224w-readings/brandes01centrality.pdf
-         * @return - vector of all vertices' betweenness centrality values
-        */
-        vector<std::pair<Vertex, int>> calculateBetweennessCentrality();
-
-
-        /**
          * returns Betweenness Centrality value for one user
          * @param id - vertex ID for user
          * @return - number representing percentage of how many shortest paths in network user is part of
         */
-        int getUserBetweennessCentrality(int id);
+        float getUserBetweennessCentrality(int id);
+
+        /**
+         * Performs BetweenessCentrality on our Graph to see who the most important people are in the network
+         * Uses Brandes's algorithm: http://snap.stanford.edu/class/cs224w-readings/brandes01centrality.pdf
+         * @return - vector of all vertices' betweenness centrality values
+        */
+        vector<std::pair<Vertex, float>> calculateBetweennessCentrality();
+
+
 
         /**
          * Adds a vertex to the graph
