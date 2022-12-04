@@ -70,6 +70,7 @@ vector<Vertex> Graph::BFS() {
     visited = new unordered_map<Vertex, bool>();
     // Grabs all vertices
     vector<Vertex> vertices = getAllVertices();
+   
     for (auto v : vertices) {
         visited->insert(make_pair(v, false));
     }
@@ -195,9 +196,106 @@ Matrix Graph::makeAdjMatrix(unordered_map<Vertex, int>& reverse_idx) {
     return M;
 }
 
-int Graph::BetweennessCentrality() {
-    return 1;
+
+void Graph::BetweennessCentrality(int num_places) {
+    //calculate betweenness centrality for all values
+    vector<std::pair<Vertex, float>> bc = calculateBetweennessCentrality();
+
+    //sort vector based on BC value
+    std::stable_sort(bc.begin(), bc.end(), [](auto &one, auto &two) {
+        return one.second > two.second;
+    });
+    
+    //output rankings
+    cout << "BETWEENNESS CENTRALITY RANKINGS:" << endl; 
+    cout << "BC represents the percentage of shortest paths of all pairs in the network that the user is part of" << endl;
+    for (int i = 0; i < num_places; ++i) {
+        cout << "#" << (i+1) << ". " << bc[i].first;
+        cout << ", BC: " << bc[i].second << "%" << endl;
+    }
 }
+
+vector<std::pair<Vertex, float>> Graph::calculateBetweennessCentrality() {
+    //grab all vertices
+    vector<Vertex> vertices = getAllVertices();
+
+    //intialize vector to return later 
+    vector<pair<Vertex, float>> bc;
+
+    //calculate BC for every vertice, set val to 0
+    unordered_map<Vertex, float> bcvals;
+    for (auto bcv : vertices) {
+        bcvals.insert(make_pair(bcv, 0));
+    }
+    for (auto v : vertices) {
+        //initialize maps for all vertices
+        /**NOTE: could use vector easier and use one line to fill, but user IDs more complicated
+        could maybe write helper to take user id and get matching index based on whatever index
+        it would be in getAllVertices()
+        for now, ill just match the code from BFS
+        **/
+        unordered_map<Vertex, int> sps; //shortest path count
+        unordered_map<Vertex, int> pred; //predecessors of each vertex on sps
+        unordered_map<Vertex, bool> visited;
+        for (auto tmpv : vertices) {
+            sps.insert(make_pair(tmpv, 0));
+            pred.insert(make_pair(tmpv, -1));
+            visited.insert(make_pair(tmpv, 0));
+        }
+        //push starting vertex, mark visited and shortest paths
+        queue<Vertex> q;
+        q.push(v);
+        sps.find(v)->second = 1;
+        visited.find(v)->second = true;
+
+        while (!q.empty()) {
+            //dequeue vertex
+            int currVertex = q.front();
+            q.pop();
+
+            //for each neighbor, if unvisited, mark visited, add pred, enqueue
+            for (auto neighbor : adj_list->find(currVertex)->second) {
+                if (!visited.find(neighbor)->second) {
+                    visited.find(neighbor)->second = true;
+                    pred.find(neighbor)->second = currVertex;
+                    q.push(neighbor);
+
+                    //add to sps and bc!
+                    sps.find(neighbor)->second = currVertex;
+                    bcvals.find(neighbor)->second = currVertex;
+                }
+                //if already visited
+                else if (pred.find(currVertex)->second != neighbor) {
+                    int neighborSp = sps.find(neighbor)->second;
+                    int cvSp = sps.find(currVertex)->second;
+                    //update BC value to be current fraction + number of shortest paths with neighbor over total
+                    bcvals.find(neighbor)->second = bcvals.find(neighbor)->second + float((neighborSp*cvSp) / (neighborSp + cvSp));
+                    sps.find(neighbor)->second = neighborSp + cvSp;
+                }
+            }
+        }
+    }
+
+    //add pairs from map to vector form
+    for (auto pair : bcvals) {
+        pair.second = pair.second / float(1000);
+        bc.push_back(pair);
+    }
+
+    return bc;
+}
+
+float Graph::getUserBetweennessCentrality(int id) {
+    //calculate BC for all vertices
+    vector<std::pair<Vertex, float>> bc = calculateBetweennessCentrality();
+
+    //return corresponding BC value for vertex
+    auto it = std::find_if(bc.begin(), bc.end(),[id](const auto& one) -> bool {
+        return one.first == id;
+    } );
+    return it->second;
+}
+
 
 void Graph::AddVertex(Vertex id) {
     if (!vertexExists(id)) {

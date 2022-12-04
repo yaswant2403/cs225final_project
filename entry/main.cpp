@@ -25,5 +25,16 @@ int main() {
     //    }
     //}
     //cout << endl;
+
+
+    // g.BetweennessCentrality(5);
+
+    // cout << endl;
+    // cout << "For the top 5 based on page rank, here are their BC vals!" << endl; 
+    // list<Vertex> prFive = g.PageRank(5);
+    // for (auto v : prFive) {
+    //     cout << v << ", BC: " << g.getUserBetweennessCentrality(v) << "%" << endl;
+    // }
+
     return 0;
 }
