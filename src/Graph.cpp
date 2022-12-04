@@ -143,6 +143,7 @@ list<Vertex> Graph::PageRank(int num_places, double alpha) {
     // Generate a normalized starting state vector of size n x 1
     Matrix x0(size, 1, 0);
     x0(0, 0) = 1;
+    
     //Perform Matrix vector multiplication until change in vector between iterations is 
     // under some tolerance/ we reach a specificed maximum number of iterations
     // TODO: Add loop break if the change in vectors is under a certain tolerance
@@ -159,6 +160,9 @@ list<Vertex> Graph::PageRank(int num_places, double alpha) {
     //Sort the indices of the output vector from largest to smallest & pull the ids of these indices from the map 
     // Take the indices of the largest num_places values and create ranking 
     // If num_place > num vertices, then list will be of size num vertices
+    // Sorting by index reference:
+    // https://stackoverflow.com/questions/1577475/c-sorting-and-keeping-track-of-indexes 
+
     vector<int> ranks(x0.getRows());
     iota(ranks.begin(), ranks.end(), 0);
     stable_sort(ranks.begin(), ranks.end(), [&](int i, int j){return x0(i, 0) > x0(j, 0);});
