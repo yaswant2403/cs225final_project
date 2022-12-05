@@ -1,4 +1,4 @@
-## cs225 final_project (Y'ALL)
+## CS225 Final Project (Y'ALL)
 # Contributors:  
 Yash Ejjagiri (yse2) \
 Afif Shomali (shomali2) \
