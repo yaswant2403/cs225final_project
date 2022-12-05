@@ -1,5 +1,5 @@
 # CS225 Final Project (Y'ALL)
-## Contributors:  
+## Contributors  
 Yash Ejjagiri (yse2) \
 Afif Shomali (shomali2) \
 Lisa Jing Leung (ljleung2) \
