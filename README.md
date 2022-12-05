@@ -26,11 +26,11 @@ Then cd into the repository & create a build directory:
 mkdir build 
 cd build
 ```
-To create a build directory, then run: 
+Then to initialize the build directory run: 
 ```
 cmake ..  
 ```
-To initialize cmake, after this you can run: 
+After this use the follow to make & run the executables: 
 ```
 make main
 ./main 
