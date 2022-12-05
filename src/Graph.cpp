@@ -276,7 +276,7 @@ vector<std::pair<Vertex, float>> Graph::calculateBetweennessCentrality() {
             if (vert != v) {
                 for (auto predvert : pred.find(vert)->second) {
                     bcvals.find(predvert)->second++;
-                    bcvals.find(predvert)->second += bcvals.find(vert)->second;
+                    //bcvals.find(predvert)->second = bcvals.find(vert)->second;
                 }
             }
         }
@@ -284,7 +284,11 @@ vector<std::pair<Vertex, float>> Graph::calculateBetweennessCentrality() {
 
     //add pairs from map to vector form
     for (auto pair : bcvals) {
-        pair.second /= (float)((vertices.size()*(vertices.size()-1))/2);
+        //cout << pair.second << endl;
+        //divide by norm factor, * 100 for percentage
+        //replace w num shortest path later
+        pair.second = pair.second * 100 / (float)((vertices.size()*(vertices.size()-1))/2);
+        pair.second = pair.second * 100 / (float)((predvert.find(pair.second).size());
         bc.push_back(pair);
     }
 
