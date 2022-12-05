@@ -197,14 +197,9 @@ Matrix Graph::makeAdjMatrix(unordered_map<Vertex, int>& reverse_idx) {
 }
 
 
-void Graph::BetweennessCentrality(int num_places) {
+void Graph::getBetweennessCentrality(int num_places) {
     //calculate betweenness centrality for all values
-    vector<std::pair<Vertex, float>> bc = calculateBetweennessCentrality();
-
-    //sort vector based on BC value
-    std::stable_sort(bc.begin(), bc.end(), [](auto &one, auto &two) {
-        return one.second > two.second;
-    });
+    vector<std::pair<Vertex, float>> bc = BetweennessCentrality();
     
     //output rankings
     cout << "BETWEENNESS CENTRALITY RANKINGS:" << endl; 
@@ -215,7 +210,7 @@ void Graph::BetweennessCentrality(int num_places) {
     }
 }
 
-vector<std::pair<Vertex, float>> Graph::calculateBetweennessCentrality() {
+vector<std::pair<Vertex, float>> Graph::BetweennessCentrality() {
     //grab all vertices
     vector<Vertex> vertices = getAllVertices();
 
@@ -291,12 +286,17 @@ vector<std::pair<Vertex, float>> Graph::calculateBetweennessCentrality() {
         bc.push_back(pair);
     }
 
+    //sort vector based on BC value
+    std::stable_sort(bc.begin(), bc.end(), [](auto &one, auto &two) {
+        return one.second > two.second;
+    });
+
     return bc;
 }
 
 float Graph::getUserBetweennessCentrality(int id) {
     //calculate BC for all vertices
-    vector<std::pair<Vertex, float>> bc = calculateBetweennessCentrality();
+    vector<std::pair<Vertex, float>> bc = BetweennessCentrality();
 
     //return corresponding BC value for vertex
     auto it = std::find_if(bc.begin(), bc.end(),[id](const auto& one) -> bool {
