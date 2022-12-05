@@ -7,9 +7,9 @@ Libby Codamon (ecoda2)
 
 ## Repo Structure
 Team Contract, Proposal & Weekly Logs can be found in `documents/`  
-The Dataset is stored as text files are stored in `data/`  
-The Tests are stored in `tests/`  
-The source code files are stored in `src/`  
+The dataset & testing data is stored as text files are stored in `data/`  
+The tests are stored in `tests/`  
+All source code files are stored in `src/`  
 The entry point source files are stored in `entry/`
 
 ## Running code 
