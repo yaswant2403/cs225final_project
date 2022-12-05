@@ -17,11 +17,11 @@ The entry point source files are stored in [`entry/`](https://github.com/yaswant
 
 ## Running code 
 
-First open the CS225 docker enviorment, and clone the repository locally:
+First open the CS225 docker enviorment, and clone the repository locally by running this in the terminal:
 ```
 git clone https://github.com/yaswant2403/cs225final_project.git
 ```
-Then cd into the repository & create a build directory:
+Then cd into the repository, create a build directory & cd into it:
 ```
 mkdir build 
 cd build
