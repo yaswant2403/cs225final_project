@@ -288,7 +288,6 @@ vector<std::pair<Vertex, float>> Graph::calculateBetweennessCentrality() {
         //divide by norm factor, * 100 for percentage
         //replace w num shortest path later
         pair.second = pair.second * 100 / (float)((vertices.size()*(vertices.size()-1))/2);
-        pair.second = pair.second * 100 / (float)((predvert.find(pair.second).size());
         bc.push_back(pair);
     }
 
