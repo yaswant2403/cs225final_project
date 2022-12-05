@@ -6,7 +6,7 @@ Lisa Jing Leung (ljleung2) \
 Libby Codamon (ecoda2) 
 
 ## Repo Structure
-Team Contract, Proposal & Weekly Logs can be found in `documents/`  
+Team Contract, Proposal & Weekly Logs can be found in [`documents/`](https://github.com/yaswant2403/cs225final_project/tree/main/documents)  
 The dataset & testing data is stored as text files are stored in `data/`  
 The tests are stored in `tests/`  
 All source code files are stored in `src/`  
