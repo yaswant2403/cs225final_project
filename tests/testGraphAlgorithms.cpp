@@ -147,9 +147,8 @@ TEST_CASE("Graph from Dataset - BFS Traversal","[algo][BFS]") {
 TEST_CASE("Small Connected PageRank", "[algo][PG]") {
     Graph g;
     g.BuildGraph("../data/small_test.txt");
-    list<Vertex> rank = g.PageRank(10);
-    list<Vertex> expected = {9,2,1,3,4};
-    
+    list<Vertex> rank = g.PageRank(10, 1000);
+    list<Vertex> expected = {9,3,2,1,4};
     REQUIRE(rank == expected);
 }
 
@@ -163,8 +162,8 @@ TEST_CASE("Small Disconnected PageRank", "[algo][PG]") {
 TEST_CASE("Graph from DataSet test", "[algo][PG]") {
     Graph g;
     g.BuildGraph("../data/686.edges");
-    list<Vertex> rank = g.PageRank(10);
-    list<Vertex> expected = {828, 713,705,719,805,745,747,824,694,823};
+    list<Vertex> rank = g.PageRank(10, 1000);
+    list<Vertex> expected = {828,713,705,719,805,745,747,824,694,823};
     REQUIRE(rank == expected);
 }
 

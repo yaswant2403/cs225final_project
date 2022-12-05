@@ -110,7 +110,7 @@ void Graph::BFSHelper(Vertex id, vector<Vertex>& out) {
     }
 }
 
-list<Vertex> Graph::PageRank(int num_places, double alpha) {
+list<Vertex> Graph::PageRank(int num_places, int num_iter, double alpha, double tol) {
     // Handle cases of bad alpha values
     if (alpha > 1) {
         alpha = 1;
@@ -148,16 +148,21 @@ list<Vertex> Graph::PageRank(int num_places, double alpha) {
     //Perform Matrix vector multiplication until change in vector between iterations is 
     // under some tolerance/ we reach a specificed maximum number of iterations
     // TODO: Add loop break if the change in vectors is under a certain tolerance
-    for (int i = 0; i < 20; i++) {
+    int k = 0;
+    for (int i = 0; i < num_iter; i++) {
         Matrix x = G * x0;
-        double norm = 0.0;
-        for (unsigned j = 0; j < x.getRows(); j++) {
-            norm += abs(x(j, 0));
+        double norm = calcNorm(x);
+        norm = 1 / norm;
+        if (calcNorm(x - x0) <= tol) {
+            x0 = x * norm;
+            break;
+        } else {
+            x0 = x * norm;
+            k++;
         }
-        norm = 1 /norm;
-        x0 = x * norm;
     }
-    
+    // Add back if we want to show number of iterations for pagerank
+    //cout << "Number of iterations needed to converge to steady state for PageRank: " << k << endl;
     //Sort the indices of the output vector from largest to smallest & pull the ids of these indices from the map 
     // Take the indices of the largest num_places values and create ranking 
     // If num_place > num vertices, then list will be of size num vertices
@@ -171,6 +176,14 @@ list<Vertex> Graph::PageRank(int num_places, double alpha) {
         ranking.push_back(idx_map.find(ranks.at(i))->second);
     }
     return ranking;
+}
+
+double Graph::calcNorm(Matrix vec) const{
+    double norm = 0.0;
+    for (unsigned j = 0; j < vec.getRows(); j++) {
+        norm += abs(vec(j, 0));
+    }
+    return norm;
 }
 
 Matrix Graph::makeAdjMatrix(unordered_map<Vertex, int>& reverse_idx) {
