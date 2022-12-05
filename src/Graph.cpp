@@ -235,42 +235,48 @@ vector<std::pair<Vertex, float>> Graph::calculateBetweennessCentrality() {
         for now, ill just match the code from BFS
         **/
         unordered_map<Vertex, int> sps; //shortest path count
-        unordered_map<Vertex, int> pred; //predecessors of each vertex on sps
+        unordered_map<Vertex, vector<Vertex>> pred; //predecessors of each vertex on sps
         unordered_map<Vertex, bool> visited;
         for (auto tmpv : vertices) {
-            sps.insert(make_pair(tmpv, 0));
-            pred.insert(make_pair(tmpv, -1));
-            visited.insert(make_pair(tmpv, 0));
+            sps.insert(make_pair(tmpv, -1));
+            pred.insert(make_pair(tmpv, 0));
+            visited.insert(make_pair(tmpv, false));
         }
         //push starting vertex, mark visited and shortest paths
         queue<Vertex> q;
         q.push(v);
-        sps.find(v)->second = 1;
         visited.find(v)->second = true;
+        sps.find(v)->second = 0;
+        //pred.find(v)->second = 1;
 
         while (!q.empty()) {
             //dequeue vertex
             int currVertex = q.front();
             q.pop();
+            //set sp to 0
+            sps.find(currVertex)->second = 0;
 
-            //for each neighbor, if unvisited, mark visited, add pred, enqueue
+            //for each neighbor
             for (auto neighbor : adj_list->find(currVertex)->second) {
                 if (!visited.find(neighbor)->second) {
+                    //mark as visited
                     visited.find(neighbor)->second = true;
-                    pred.find(neighbor)->second = currVertex;
+                    //add dist +1
+                    sps.find(neighbor)->second = sps.find(currVertex)->second + 1;
+                    pred.find(neighbor)->second.push_back(currVertex);
                     q.push(neighbor);
-
-                    //add to sps and bc!
-                    sps.find(neighbor)->second = currVertex;
-                    bcvals.find(neighbor)->second = currVertex;
                 }
                 //if already visited
-                else if (pred.find(currVertex)->second != neighbor) {
-                    int neighborSp = sps.find(neighbor)->second;
-                    int cvSp = sps.find(currVertex)->second;
-                    //update BC value to be current fraction + number of shortest paths with neighbor over total
-                    bcvals.find(neighbor)->second = bcvals.find(neighbor)->second + float((neighborSp*cvSp) / (neighborSp + cvSp));
-                    sps.find(neighbor)->second = neighborSp + cvSp;
+                else if (sps.find(neighbor)->second == sps.find(currVertex)->second + 1) {
+                    pred.find(neighbor)->second.push_back(currVertex);
+                }
+            }
+        }
+        for (auto vert : vertices) {
+            if (vert != v) {
+                for (auto predvert : pred.find(vert)->second) {
+                    bcvals.find(predvert)->second++;
+                    bcvals.find(predvert)->second += bcvals.find(vert)->second;
                 }
             }
         }
@@ -278,7 +284,7 @@ vector<std::pair<Vertex, float>> Graph::calculateBetweennessCentrality() {
 
     //add pairs from map to vector form
     for (auto pair : bcvals) {
-        pair.second = pair.second / float(1000);
+        pair.second /= (float)((vertices.size()*(vertices.size()-1))/2);
         bc.push_back(pair);
     }
 
