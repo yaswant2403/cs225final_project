@@ -148,14 +148,24 @@ TEST_CASE("Small Connected PageRank", "[algo][PG]") {
     Graph g;
     g.BuildGraph("../data/small_test.txt");
     list<Vertex> rank = g.PageRank(10);
+    list<Vertex> expected = {9,2,1,3,4};
+    
+    REQUIRE(rank == expected);
 }
 
 TEST_CASE("Small Disconnected PageRank", "[algo][PG]") {
-
+    Graph g;
+    g.BuildGraph("../data/disconnected.txt");
+    list<Vertex> rank = g.PageRank(10);
+    list<Vertex> expected = {6,5,4,3,2,1};
+    REQUIRE(rank == expected);
 }
-
 TEST_CASE("Graph from DataSet test", "[algo][PG]") {
-
+    Graph g;
+    g.BuildGraph("../data/686.edges");
+    list<Vertex> rank = g.PageRank(10);
+    list<Vertex> expected = {828, 713,705,719,805,745,747,824,694,823};
+    REQUIRE(rank == expected);
 }
 
 /**
