@@ -88,7 +88,10 @@ class Graph
         /**
          * Performs PageRank on our graph to see who the "most important/popular" person is
          * @param num_places -How many places of rankings to return (eg top 5, 10, etc)
+         * @param num_iter - How many times to run the iteration for PageRank
          * @param alpha - The dampening factor for the PageRank Matrix, defaults to 0.85, this value must be 
+         * @param tol - tolerance for stopping iterations early, if the difference in norms between two iterations
+         *  is smaller than tol, we stop iterating
          *  a probablity, e.g. a number 0 to 1
          *  Dampening factor is the "The probability, at any step, that the person will continue is a damping factor d."
          *  https://en.wikipedia.org/wiki/PageRank#Damping_factor 
