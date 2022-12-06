@@ -30,9 +30,23 @@ Then to initialize the build directory run:
 ```
 cmake ..  
 ```
-After this use the follow to make & run the executables: 
+Then run the command below to make all the executables:
 ```
-make main
-./main 
+make
 ```
-(Todo: Replace the "make main" above with our actual entry and exectuable later)
+Or run make on the individual executables:
+```
+make BFS
+make PageRank
+make BC
+make test
+```
+Here are the ways to run the programs:
+For PageRank run:
+```
+./PageRank [filename] [num_places]
+```
+Where `filename` is a string path to your file, for example '../data/686.edges'  
+and 'num_places' is an int for how many top nodes you want displayed  
+
+(Todo: Add the rest of our demonstration files & how to correcty run them)
