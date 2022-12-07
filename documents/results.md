@@ -2,9 +2,9 @@
 
 ## Algorithms:  
 ### BFS:  
-	Output
-	Correctness
-	What testing we did
+Output
+Correctness
+What testing we did
 
 ### PageRank: 
 Our PageRank works correctly, and runs in a reasonable amount of time for our entire dataset. To test the PageRank algorithm we made a few smaller example graphs, including ones with multiple connected components & checked the results against the same Algorithm implemented in python. 
