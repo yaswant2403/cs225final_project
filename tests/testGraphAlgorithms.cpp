@@ -159,6 +159,7 @@ TEST_CASE("Small Disconnected PageRank", "[algo][PG]") {
     list<Vertex> expected = {6,5,4,3,2,1};
     REQUIRE(rank == expected);
 }
+
 TEST_CASE("Graph from DataSet test", "[algo][PG]") {
     Graph g;
     g.BuildGraph("../data/686.edges");
