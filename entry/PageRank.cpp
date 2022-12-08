@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     }
     Graph g;
     g.BuildGraph(filename);
-    list<Vertex> result = g.PageRank(num_place);
+    vector<Vertex> result = g.PageRank(num_place);
     cout << "Here are the top " << num_place << " ranked users in this social network graph:" << endl;
     int i = 1;
     for (auto x : result) {

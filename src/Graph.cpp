@@ -110,14 +110,14 @@ void Graph::BFSHelper(Vertex id, vector<Vertex>& out) {
     }
 }
 
-list<Vertex> Graph::PageRank(int num_places, int num_iter, double alpha, double tol) {
+vector<Vertex> Graph::PageRank(int num_places, int num_iter, double alpha, double tol) {
     // Handle cases of bad alpha values
     if (alpha > 1) {
         alpha = 1;
     } else if (alpha < 0) {
         alpha = 0;
     }
-    list<Vertex> ranking;
+    vector<Vertex> ranking;
     unordered_map<int, Vertex> idx_map;
     unordered_map<Vertex, int> reverse_idx;
     // map n indices to the ids of nodes, store a map of indices to the ID of each node 
