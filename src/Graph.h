@@ -101,7 +101,6 @@ class Graph
 
         /**
          * Performs BetweenessCentrality on our Graph to see who the most important people are in the network
-         * Uses Brandes's algorithm: http://snap.stanford.edu/class/cs224w-readings/brandes01centrality.pdf
          * @return - vector of all vertices' betweenness centrality values
         */
         vector<std::pair<Vertex, float>> BetweennessCentrality();

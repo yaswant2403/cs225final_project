@@ -233,6 +233,7 @@ vector<std::pair<Vertex, float>> Graph::BetweennessCentrality() {
     for (auto bcv : vertices) {
         bcvals.insert(make_pair(bcv, 0));
     }
+    int pathcount = 0;
     for (auto v : vertices) {
         //initialize maps for all vertices
         /**NOTE: could use vector easier and use one line to fill, but user IDs more complicated
@@ -281,19 +282,20 @@ vector<std::pair<Vertex, float>> Graph::BetweennessCentrality() {
         for (auto vert : vertices) {
             if (vert != v) {
                 for (auto predvert : pred.find(vert)->second) {
-                    bcvals.find(predvert)->second++;
-                    //bcvals.find(predvert)->second = bcvals.find(vert)->second;
+                    //if actual path, more than 2 verts
+                    if (pred.find(predvert)->second.size() > 2) {
+                        bcvals.find(predvert)->second++;
+                        pathcount++;
+                    }
                 }
             }
         }
     }
 
+    cout << pathcount << endl;
     //add pairs from map to vector form
     for (auto pair : bcvals) {
-        //cout << pair.second << endl;
-        //divide by norm factor, * 100 for percentage
-        //replace w num shortest path later
-        pair.second = pair.second * 100 / (float)((vertices.size()*(vertices.size()-1))/2);
+        //find norm factor, for small example should be 0.5
         bc.push_back(pair);
     }
 

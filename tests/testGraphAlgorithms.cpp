@@ -174,7 +174,8 @@ TEST_CASE("Graph from DataSet test", "[algo][PG]") {
 TEST_CASE("Small Connected BC", "[algo][BC]") {
     Graph g;
     g.BuildGraph("../data/small_test.txt");
-    vector<Vertex> expected = {1, 9, 2, 3, 4}; 
+    //g.getBetweennessCentrality(5);
+    vector<Vertex> expected = {9, 1, 2, 3, 4}; 
     auto bc = g.BetweennessCentrality();
     for (size_t i = 0; i < expected.size(); ++i) {
         REQUIRE(expected[i] == bc[i].first);
@@ -183,7 +184,8 @@ TEST_CASE("Small Connected BC", "[algo][BC]") {
 TEST_CASE("Small Disconnected BC", "[algo][BC]") {
     Graph g;
     g.BuildGraph("../data/disconnected.txt");
-    vector<Vertex> expected = {2, 5, 1, 4, 3}; 
+    vector<Vertex> expected = {1, 2, 3, 4, 5}; 
+    //g.getBetweennessCentrality(5);
     auto bc = g.BetweennessCentrality();
     for (size_t i = 0; i < expected.size(); ++i) {
         REQUIRE(expected[i] == bc[i].first);
@@ -193,6 +195,7 @@ TEST_CASE("Small Disconnected BC", "[algo][BC]") {
 TEST_CASE("Dataset BC", "[algo][BC]") {
     Graph g;
     g.BuildGraph("../data/686.edges");
+    g.getBetweennessCentrality(5);
     vector<Vertex> expected = {828, 713, 705, 719, 805}; 
     auto bc = g.BetweennessCentrality();
     for (size_t i = 0; i < expected.size(); ++i) {
