@@ -97,7 +97,7 @@ class Graph
          *  https://en.wikipedia.org/wiki/PageRank#Damping_factor 
          * @return -List of size num_places with the top num_places vertices in the graph according to PageRank
         */
-        list<Vertex> PageRank(int num_places = 10, int num_iter=20, double alpha=0.85, double tol=1e-6);
+        vector<Vertex> PageRank(int num_places = 10, int num_iter=20, double alpha=0.85, double tol=1e-6);
 
         /**
          * Performs BetweenessCentrality on our Graph to see who the most important people are in the network
