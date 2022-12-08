@@ -127,7 +127,7 @@ TEST_CASE("Small Graph Disconnected - BFS Traversal","[algo][BFS]") {
 TEST_CASE("Graph from Dataset - BFS Traversal","[algo][BFS]") {
     Graph g;
     g.BuildGraph("../data/686.edges");
-    g.print();
+    //g.print();
     vector<Vertex> bfs = g.BFS();
     // cout << "Random BFS" << endl;
     // for (auto v : bfs) {
