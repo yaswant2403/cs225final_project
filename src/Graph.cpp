@@ -148,7 +148,6 @@ list<Vertex> Graph::PageRank(int num_places, int num_iter, double alpha, double 
     //Perform Matrix vector multiplication until change in vector between iterations is 
     // under some tolerance/ we reach a specificed maximum number of iterations
     // TODO: Add loop break if the change in vectors is under a certain tolerance
-    int k = 0;
     for (int i = 0; i < num_iter; i++) {
         Matrix x = G * x0;
         double norm = calcNorm(x);
@@ -158,7 +157,6 @@ list<Vertex> Graph::PageRank(int num_places, int num_iter, double alpha, double 
             break;
         } else {
             x0 = x * norm;
-            k++;
         }
     }
     // Add back if we want to show number of iterations for pagerank
