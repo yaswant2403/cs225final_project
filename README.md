@@ -41,13 +41,15 @@ make PageRank
 make BC
 make test
 ```
-Here are the ways to run the programs:  
+######Here are the ways to run the programs:  
+
 For `PageRank` run:
 ```
 ./PageRank [filename] [num_places]
 ```
 Where `filename` is a string path to your file, for example `../data/686.edges`  
 and `num_places` is an int for how many top nodes you want displayed  
+
 
 For `Betweenness Centrality` run:
 ```
