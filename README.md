@@ -41,7 +41,7 @@ make PageRank
 make BC
 make test
 ```
-###### Here are the ways to run the programs:  
+##### Here are the ways to run the programs:  
 
 For `PageRank` run:
 ```
