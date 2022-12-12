@@ -52,7 +52,7 @@ If you want to use your own file to build a graph, you need to feed the programs
 ```
 ./main
 ```
-Input a valid user ID and and it will return their ranking according to BC and PageRank
+Input a valid user ID and and it will return their ranking according to BC and PageRank.
 
 ##### For `Betweenness Centrality` run:
 ```
