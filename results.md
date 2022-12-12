@@ -38,11 +38,11 @@ Nodes with higher betweenness centrality have more control and higher importance
 Example Result:
 ```
 Here is the Betweenness Centrality ranking of our dataset:
-1: User with I.D. 828, BC: 9213%
-2: User with I.D. 713, BC: 8686%
-3: User with I.D. 705, BC: 7972%
-4: User with I.D. 719, BC: 7600%
-5: User with I.D. 805, BC: 6537%
+1:  User with ID - 828,  BC Value: 9213,  As Percentage: 66.4671%
+2:  User with ID - 713,  BC Value: 8686,  As Percentage: 62.665%
+3:  User with ID - 705,  BC Value: 7972,  As Percentage: 57.5139%
+4:  User with ID - 719,  BC Value: 7600,  As Percentage: 54.8301%
+5:  User with ID - 805,  BC Value: 6537,  As Percentage: 47.1611%
 
 ```
 	
