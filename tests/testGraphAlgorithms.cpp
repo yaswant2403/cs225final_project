@@ -152,7 +152,7 @@ TEST_CASE("Small Connected BC", "[algo][BC]") {
     vector<Vertex> topUsers = g.getTopIDs(5);
     REQUIRE(expected == topUsers);
     REQUIRE(g.getUserBetweennessCentrality(9) == 3.0);
-    REQUIRE(g.getPercentUserBetweennessCentrality(9) == 0.5);
+    REQUIRE(g.getPercentUserBetweennessCentrality(9) == 50);
     REQUIRE(g.getUserBetweennessCentrality(1) == 0);
     REQUIRE(g.getUserBetweennessCentrality(2) == 0);
     REQUIRE(g.getUserBetweennessCentrality(3) == 0);
