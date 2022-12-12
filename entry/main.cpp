@@ -4,37 +4,33 @@
 using namespace std;
 // Temporary Testing File to ensure Cmake is working correctly 
 int main() {
+    cout << "Welcome to our profile search tool!" << endl;
     Graph g;
     g.BuildGraph("../data/686.edges");
-    // g.print();
 
-    // Using to check that bfs got these nodes
-    //vector<Vertex> disc = g.getDisconnectedNodes();
-    //cout << endl;
-    //for (auto v : disc) {
-    //    cout << v << " ";
-    //}
-    //vector<Vertex> bfs = g.BFS();
-    //int i = 0;
-    //for (auto e : bfs) {
-    //    cout << e << " ";
-    //    i++;
-    //    if (i == 10) {
-    //        cout << endl;
-    //        i = 0;
-    //    }
-    //}
-    //cout << endl;
+    
+    int x; 
+    cout << "Enter a user ID to get back their rank according to PageRank and Betweenness Centrality: ";
+    cin >> x; 
+
+    int graphSize = g.getAllVertices().size();
+    vector<Vertex> bcAll = g.getTopIDs(graphSize);
+    int rank = 0;
+    for (Vertex v : bcAll) {
+        rank++;
+        if (v == x) break;
+    }
+    cout << "Their rank according to BC is " << rank << " / " << graphSize << "." << endl;
+
+    vector<Vertex> prAll = g.PageRank(graphSize, 1000);
+    rank = 0;
+    for (Vertex v : prAll) {
+        rank++;
+        if (v == x) break;
+    }
+     cout << "Their rank according to PageRank is " << rank << " / " << graphSize << "." << endl;
 
 
-    // g.getBetweennessCentrality(7);
-
-    // cout << endl;
-    // cout << "For the top 7 based on page rank, here are their BC vals!" << endl; 
-    // list<Vertex> prFive = g.PageRank(7);
-    // for (auto v : prFive) {
-    //     cout << v << ", BC: " << g.getUserBetweennessCentrality(v) << "%" << endl;
-    // }
-
+ 
     return 0;
 }
