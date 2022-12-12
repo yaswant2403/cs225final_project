@@ -23,25 +23,15 @@ int main() {
         cin >> ID; 
         if (ID == "done") return 0;
 
-        auto vertices = g.getAllVertices();
-        bool found = false;
-        for (int i : vertices) {
-            if (stoi(ID) == i) found = true;
-        }
-        while (!found) {
+        while (!g.vertexExists(stoi(ID))) {
             cout << "Invalid user ID! Try again." << endl;
             cout << "User ID: ";
             cin >> ID;
             if (ID == "done") return 0;
-            for (int i : vertices) {
-                if (stoi(ID) == i) {
-                    found = true;
-                }
-            }
         }
         int x = stoi(ID);
 
-        int graphSize = g.getAllVertices().size();
+        int graphSize = g.getSize();
         vector<Vertex> bcAll = g.getTopIDs(graphSize);
         int rank = 0;
         for (Vertex v : bcAll) {
