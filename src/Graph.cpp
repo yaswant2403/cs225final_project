@@ -1,14 +1,14 @@
 #include "Graph.h"
 #include "utils.h"
 
+using namespace std;
+
 Graph::Graph() {
     size = 0;
     adj_list = new unordered_map<Vertex, list<Vertex>>();
-    visited = new unordered_map<Vertex, bool>();
 }
 
 Graph::~Graph() {
-    delete visited;
     delete adj_list;
 }
 
@@ -47,6 +47,21 @@ list<Vertex> Graph::getAdjacencyList (Vertex id) {
     }
 }
 
+void Graph::AddVertex(Vertex id) {
+    if (!vertexExists(id)) {
+        adj_list->insert(make_pair(id, list<Vertex>()));
+        visited[id] = false;
+        size++;
+    }
+}
+
+void Graph::AddEdge(Vertex id1, Vertex id2) {
+    if (vertexExists(id1) && vertexExists(id2) && !(edgeExists(id1, id2))) {
+        adj_list->at(id1).push_back(id2);
+        adj_list->at(id2).push_back(id1);
+    }
+}
+
 bool Graph::vertexExists(Vertex id) {
     return !(adj_list->find(id) == adj_list->end());
 }
@@ -65,21 +80,24 @@ int Graph::getSize() {
 }
 
 vector<Vertex> Graph::BFS() {
-    // Reset visited incase someone does BFS twice
-    delete visited;
-    visited = new unordered_map<Vertex, bool>();
     // Grabs all vertices
     vector<Vertex> vertices = getAllVertices();
-   
-    for (auto v : vertices) {
-        visited->insert(make_pair(v, false));
+
+    // Reset visited if any of the vertices have been visited
+    // In case someone does BFS Twice
+    if (visited.begin()->second) {
+        visited.clear();
+        for (auto& v : vertices) {
+            visited.insert(make_pair(v, false));
+        }
     }
+
     vector<Vertex> output;
 
     // Does BFS on each vertex in vertices if vertex hasn't been visited yet
     for (int idx = 0; idx < size; ++idx) {
         int vertex = vertices.at(idx);
-        if (visited->find(vertex)->second == false) {
+        if (visited[vertex] == false) {
             BFSHelper(vertex, output);
         }
     }
@@ -91,7 +109,7 @@ void Graph::BFSHelper(Vertex id, vector<Vertex>& out) {
     // enqueue starting node
     q.push(id);
     // setting starting node as visited
-    visited->find(id)->second = true;
+    visited[id] = true;
     while (!(q.empty())) {
         // dequeue vertex
         int currVertex = q.front();
@@ -99,11 +117,11 @@ void Graph::BFSHelper(Vertex id, vector<Vertex>& out) {
         q.pop();
 
         // Get currVertex Neighbors
-        list<Vertex> currNeighbors = adj_list->find(currVertex)->second;
+        list<Vertex> currNeighbors = (*adj_list)[currVertex];
         for (auto neighbor : currNeighbors) {
             // if vertex hasn't been visited AKA visited == false
-            if (!visited->find(neighbor)->second) {
-                visited->find(neighbor)->second = true;
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
                 q.push(neighbor);
             }
         }
@@ -147,7 +165,6 @@ vector<Vertex> Graph::PageRank(int num_places, int num_iter, double alpha, doubl
     
     //Perform Matrix vector multiplication until change in vector between iterations is 
     // under some tolerance/ we reach a specificed maximum number of iterations
-    // TODO: Add loop break if the change in vectors is under a certain tolerance
     for (int i = 0; i < num_iter; i++) {
         Matrix x = G * x0;
         double norm = calcNorm(x);
@@ -208,33 +225,18 @@ Matrix Graph::makeAdjMatrix(unordered_map<Vertex, int>& reverse_idx) {
 }
 
 
-void Graph::getBetweennessCentrality(int num_places) {
-    //calculate betweenness centrality for all values
-    vector<std::pair<Vertex, float>> bc = BetweennessCentrality();
-    
-    //output rankings
-    cout << "BETWEENNESS CENTRALITY RANKINGS:" << endl; 
-    cout << "BC represents the percentage of shortest paths of all pairs in the network that the user is part of" << endl;
-    for (int i = 0; i < num_places; ++i) {
-        cout << "#" << (i+1) << ". " << bc[i].first;
-        cout << ", BC: " << bc[i].second << "%" << endl;
-    }
-}
-
-vector<std::pair<Vertex, float>> Graph::BetweennessCentrality() {
+void Graph::BetweennessCentrality() {
+    // incase user calls Betweeness Centrality twice
+    betweennessCentrality.clear();
     //grab all vertices
     vector<Vertex> vertices = getAllVertices();
 
-    //intialize vector to return later 
-    vector<pair<Vertex, float>> bc;
-
-    //calculate BC for every vertice, set val to 0
-    unordered_map<Vertex, float> bcvals;
-    for (auto bcv : vertices) {
-        bcvals.insert(make_pair(bcv, 0));
+    //initial BC for every vertice is 0
+    for (auto& bcv : vertices) {
+        betweennessCentrality[bcv] = 0;
     }
     int pathcount = 0;
-    for (auto v : vertices) {
+    for (auto& v : vertices) {
         //initialize maps for all vertices
         /**NOTE: could use vector easier and use one line to fill, but user IDs more complicated
         could maybe write helper to take user id and get matching index based on whatever index
@@ -244,105 +246,127 @@ vector<std::pair<Vertex, float>> Graph::BetweennessCentrality() {
         unordered_map<Vertex, int> sps; //shortest path count
         unordered_map<Vertex, vector<Vertex>> pred; //predecessors of each vertex on sps
         unordered_map<Vertex, bool> visited;
-        for (auto tmpv : vertices) {
-            sps.insert(make_pair(tmpv, -1));
+        for (auto& tmpv : vertices) {
+            sps[tmpv] = -1;
             pred.insert(make_pair(tmpv, 0));
-            visited.insert(make_pair(tmpv, false));
+            visited[tmpv] = false;
         }
         //push starting vertex, mark visited and shortest paths
         queue<Vertex> q;
         q.push(v);
-        visited.find(v)->second = true;
-        sps.find(v)->second = 0;
-        //pred.find(v)->second = 1;
+        visited[v] = true;
+        sps[v] = 0;
 
         while (!q.empty()) {
             //dequeue vertex
             int currVertex = q.front();
             q.pop();
             //set sp to 0
-            sps.find(currVertex)->second = 0;
+            sps[currVertex] = 0;
 
             //for each neighbor
-            for (auto neighbor : adj_list->find(currVertex)->second) {
-                if (!visited.find(neighbor)->second) {
+            for (auto& neighbor : adj_list->find(currVertex)->second) {
+                // if not visited
+                if (!visited[neighbor]) {
                     //mark as visited
-                    visited.find(neighbor)->second = true;
-                    //add dist +1
-                    sps.find(neighbor)->second = sps.find(currVertex)->second + 1;
-                    pred.find(neighbor)->second.push_back(currVertex);
+                    visited[neighbor] = true;
+                    //add dist + 1
+                    sps[neighbor] = sps[currVertex] + 1;
+                    pred[neighbor].push_back(currVertex);
                     q.push(neighbor);
                 }
                 //if already visited
-                else if (sps.find(neighbor)->second == sps.find(currVertex)->second + 1) {
-                    pred.find(neighbor)->second.push_back(currVertex);
+                else if (sps[neighbor] == sps[currVertex] + 1) {
+                    pred[neighbor].push_back(currVertex);
                 }
             }
         }
-        for (auto vert : vertices) {
+        for (auto& vert : vertices) {
             if (vert != v) {
-                for (auto predvert : pred.find(vert)->second) {
-                    //if actual path, more than 2 verts
-                    if (pred.find(predvert)->second.size() > 2) {
-                        bcvals.find(predvert)->second++;
+                for (auto& predvert : pred[vert]) {
+                    //if actual path has more than 2 verts
+                    if (pred[predvert].size() > 2) {
+                        betweennessCentrality[predvert]++;
                         pathcount++;
                     }
                 }
             }
         }
     }
-
-    cout << pathcount << endl;
-    //add pairs from map to vector form
-    for (auto pair : bcvals) {
-        //find norm factor, for small example should be 0.5
-        bc.push_back(pair);
+    // cout << pathcount << endl;
+    //intialize vector to sort 
+    vector<pair<Vertex, float>> sorted_bc;
+    // Pushing all Vertices and BC into this vector
+    for (auto& pair : betweennessCentrality) {
+        sorted_bc.push_back(pair);
     }
-
-    //sort vector based on BC value
-    std::stable_sort(bc.begin(), bc.end(), [](auto &one, auto &two) {
-        return one.second > two.second;
+    //sort based on BC value descending because unordedmap acts as 
+    // vector when inserting so highest BC val will be first pair
+    stable_sort(sorted_bc.begin(), sorted_bc.end(), [](auto& pairA, auto& pairB) {
+        return pairA.second < pairB.second;
     });
+    // putting back into betweenessCentrality map and it's unordered so should be the same order as sorted
+    betweennessCentrality.clear();
+    for (auto& pair : sorted_bc) {
+        betweennessCentrality[pair.first] = pair.second;
+    }
+    // setting calculatedBC to be true
+    calculatedBC = true;
+}
 
-    return bc;
+vector<Vertex> Graph::getTopIDs(int num_places) {
+    // if betweenessCentrality hasn't been calculated, go calculate it first
+    if (!calculatedBC) {
+        BetweennessCentrality();
+    } 
+    // output vector for top X number of users
+    vector<Vertex> topUsers;
+    // Returns dummy vector if num_places > size of graph
+    if (num_places > size) {
+        return {-1,-1};
+    }
+    int count = 0;
+    for (auto it = betweennessCentrality.begin(); count != num_places && it != betweennessCentrality.end(); ++it) {
+        topUsers.push_back(it->first);
+        count++;
+    }
+    return topUsers;
 }
 
 float Graph::getUserBetweennessCentrality(int id) {
-    //calculate BC for all vertices
-    vector<std::pair<Vertex, float>> bc = BetweennessCentrality();
-
+    // if betweenessCentrality hasn't been calculated, go calculate it first
+    if (!calculatedBC) {
+        BetweennessCentrality();
+    }
     //return corresponding BC value for vertex
-    auto it = std::find_if(bc.begin(), bc.end(),[id](const auto& one) -> bool {
-        return one.first == id;
-    } );
-    return it->second;
+    if (vertexExists(id)) {
+        return betweennessCentrality[id];
+    }
+    return -1.0;
 }
 
-
-void Graph::AddVertex(Vertex id) {
-    if (!vertexExists(id)) {
-        adj_list->insert(make_pair(id, list<Vertex>()));
-        visited->insert(make_pair(id, false));
-        size++;
+float Graph::getNormalizedUserBetweennessCentrality(int id) {
+    // if betweenessCentrality hasn't been calculated, go calculate it first
+    if (!calculatedBC) {
+        BetweennessCentrality();
     }
+    //return corresponding normalized BC value for vertex
+    if (vertexExists(id)) {
+        // normalizing BC Value for undirected graph
+        // formula is dividing through each pair not including current vertex
+        // by (N - 1)(N - 2)/2 where N is the number of nodes in the graph
+        float scaleFactor = 2.0 / ((size - 1) * (size - 2));
+        return betweennessCentrality[id] * scaleFactor;
+    }
+    return -1.0;
 }
 
-void Graph::AddEdge(Vertex id1, Vertex id2) {
-    if (vertexExists(id1) && vertexExists(id2) && !(edgeExists(id1, id2))) {
-        adj_list->at(id1).push_back(id2);
-        adj_list->at(id2).push_back(id1);
+unordered_map<Vertex, float> Graph::getAllBetweennessCentrality() {
+    // if betweenessCentrality hasn't been calculated, go calculate it first
+    if (!calculatedBC) {
+        BetweennessCentrality();
     }
-}
-
-vector<Vertex> Graph::getDisconnectedNodes() {
-    vector<Vertex> vertices = getAllVertices();
-    vector<Vertex> result;
-    for (auto v : vertices) {
-        if (adj_list->find(v)->second.size() <= 1) {
-            result.push_back(v);
-        }
-    }
-    return result;
+    return betweennessCentrality;
 }
 
 void Graph::print() const {
