@@ -29,7 +29,8 @@ Here are the top 5 ranked users in this social network graph:
 ### Betweenness Centrality:
 Our Betweenness Centrality mostly works correctly, and runs in a reasonable amount of time for our dataset. Our runtime is Ө(n3), which is currently the fastest known time for this algorithm. The runtime we listed in the proposal is based on Brande’s Centrality (a faster way to implement Degree Centrality). Using our Betweenness Centrality algorithm, we were able to correctly measure the centrality of each node in a graph based on the total number of shortest path between Facebook profiles. More specifically, Betweenness Centrality represents the percentage of shortest paths of all pairs in the network that a user is a part of. The percentage is calculated through this formula:
 
-![For Unweighted Graphs](https://www.geeksforgeeks.org/wp-content/ql-cache/quicklatex.com-dfb7f4acf1fea230984ae7e20ba7b273_l3.svg) * total number of shortest paths that the current node is a part of. 
+(N-1)(N-2)/2 * total number of shortest paths that the current node is a part of.
+(where N is number of nodes in Graph)
 
 Nodes with higher betweenness centrality have more control and higher importance over the network of Facebook profiles, as more information passes through those nodes. To test our Betweenness Centrality algorithm, we wrote test cases for smaller graphs and then used Python with the networkX module for testing on our dataset.
 
