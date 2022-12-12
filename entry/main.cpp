@@ -4,11 +4,11 @@
 using namespace std;
 // Temporary Testing File to ensure Cmake is working correctly 
 int main() {
-    cout << "Welcome to our profile search tool!" << endl;
+    cout << "Welcome to Y'ALL's profile search tool!" << endl;
     Graph g;
     g.BuildGraph("../data/686.edges");
 
-    
+
     int x; 
     cout << "Enter a user ID to get back their rank according to PageRank and Betweenness Centrality: ";
     cin >> x; 
@@ -29,8 +29,6 @@ int main() {
         if (v == x) break;
     }
      cout << "Their rank according to PageRank is " << rank << " / " << graphSize << "." << endl;
-
-
  
     return 0;
 }
