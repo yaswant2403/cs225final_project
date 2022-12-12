@@ -7,6 +7,8 @@ Libby Codamon (ecoda2)
 
 ## The link to our final presentation  (add later when we finish video)
 
+## Insert link to final report
+
 ## Repo Structure
 Team Contract, Proposal, Weekly Logs & Written Report can be found in [`documents/`](https://github.com/yaswant2403/cs225final_project/tree/main/documents)  
 The dataset & testing data is stored as text files are stored in [`data/`](https://github.com/yaswant2403/cs225final_project/tree/main/data)   
