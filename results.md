@@ -29,14 +29,15 @@ Here are the top 5 ranked users in this social network graph:
 Betweenness Centrality:
 Our Betweenness Centrality works correctly, and runs in a reasonable amount of time for our dataset. Using our Betweenness Centrality algorithm, we were able to correctly measure the centrality in a graph based on the shortest path between Facebook profiles. More specifically, Betweenness Centrality represents the percentage of shortest paths of all pairs in the network that a user is a part of. Nodes with higher betweenness centrality have more control and higher importance over the network of Facebook profiles, as more information passes through those nodes. To test our Betweenness Centrality algorithm, we used a Python Network for actual graph testing.
 
-	Example Result:
-	```
+Example Result:
+```
 Here is the Betweenness Centrality ranking of our dataset:
 1: User with I.D. 828, BC: 9213%
 2: User with I.D. 713, BC: 8686%
 3: User with I.D. 705, BC: 7972%
 4: User with I.D. 719, BC: 7600%
 5: User with I.D. 805, BC: 6537%
+
 ```
 	
 Leading Question:
