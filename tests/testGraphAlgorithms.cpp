@@ -151,7 +151,7 @@ TEST_CASE("Small Connected BC", "[algo][BC]") {
     g.BetweennessCentrality();
     vector<Vertex> topUsers = g.getTopIDs(5);
     REQUIRE(expected == topUsers);
-    REQUIRE(g.getUserBetweennessCentrality(9) == 0.5);
+    REQUIRE(g.getUserBetweennessCentrality(9) == 3.0);
     REQUIRE(g.getUserBetweennessCentrality(1) == 0);
     REQUIRE(g.getUserBetweennessCentrality(2) == 0);
     REQUIRE(g.getUserBetweennessCentrality(3) == 0);
@@ -183,7 +183,7 @@ TEST_CASE("Dataset BC", "[algo][BC]") {
     REQUIRE(expected == topUsers);
     REQUIRE(g.getUserBetweennessCentrality(828) == 9213);
     // rounding to three decimal places
-    REQUIRE (round(g.getNormalizedUserBetweennessCentrality(828) * 1000.0)/1000.0 == 0.665);
+    REQUIRE (round(g.getPercentUserBetweennessCentrality(828) * 1000.0)/1000.0 == 66.467);
     REQUIRE(g.getUserBetweennessCentrality(713) == 8686);
     REQUIRE(g.getUserBetweennessCentrality(705) == 7972);
     REQUIRE(g.getUserBetweennessCentrality(719) == 7600);
