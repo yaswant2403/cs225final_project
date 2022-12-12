@@ -7,7 +7,7 @@ Libby Codamon (ecoda2)
 
 ## [The link to our final presentation](https://mediaspace.illinois.edu/media/t/1_4zyri3x5)
 
-## Written Final Report can be found in results.md
+## [Written Final Report link](https://github.com/yaswant2403/cs225final_project/blob/main/documents/results.md)
 
 ## Repo Structure
 Team Contract, Proposal, Weekly Logs & Written Report can be found in [`documents/`](https://github.com/yaswant2403/cs225final_project/tree/main/documents)  
