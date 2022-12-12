@@ -5,6 +5,7 @@ ADT Implementation:
 To implement this project, we created a Graph class to handle creating graphs and the algorithms: BFS, PageRank, and Betweenness Centrality. We also implemented a Matrix class to make the PageRank algorithm simpler to implement, as we did not have access to a linear algebra library. 
 
 Algorithms:
+
 BFS:
 Our Breadth First Search, BFS, algorithm traversal runs correctly and works on our larger dataset of Facebook profiles. Our BFS algorithm traverses through the friend network dataset to find connected components of the graph, and correctly searches the data structure using a first in-first out queue. To ensure BFS worked correctly, we made a few smaller test case graphs, including ones that have multiple connected components. 
 Example Result:
