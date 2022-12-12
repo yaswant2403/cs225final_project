@@ -7,7 +7,8 @@ To implement this project, we created a Graph class to handle creating graphs an
 ## Algorithms:
 
 ### BFS:
-Our Breadth First Search, BFS, algorithm traversal runs correctly and works on our larger dataset of Facebook profiles. Our BFS algorithm traverses through the friend network dataset to find connected components of the graph, and correctly searches the data structure using a first in-first out queue. To ensure BFS worked correctly, we made a few smaller test case graphs, including ones that have multiple connected components. 
+Our Breadth First Search, BFS, algorithm traversal runs correctly and works on our larger dataset of Facebook profiles. It run within our proposed runtime of Ө(n+e), where n is number of nodes and e is number of edges. Our BFS algorithm traverses through the friend network dataset to find connected components of the graph, and correctly searches the data structure using a first in-first out queue. To ensure BFS worked correctly, we made a few smaller test case graphs, including ones that have multiple connected components. 
+
 Example Result:
 ```
 Here is the BFS traversal order of this social network graph: 
@@ -16,6 +17,7 @@ Here is the BFS traversal order of this social network graph:
 ```
 ### PageRank: 
 Our PageRank works correctly, and runs in a reasonable amount of time for our entire dataset. It achieves our proposed runtime of Ө(n<sup>3</sup>). Similar to the original PageRank algorithm used by Google Search to rank web pages in their search engine results, we were able to measure the importance of Facebook friends within a network dataset by using an analysis algorithm that assigns a weight to each element. To test the PageRank algorithm we made a few smaller example graphs, including ones with multiple connected components and checked the results against the same Algorithm implemented in python. 
+
 Example Result:
 ```
 Here are the top 5 ranked users in this social network graph:
