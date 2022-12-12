@@ -293,7 +293,7 @@ void Graph::BetweennessCentrality() {
             }
         }
     }
-    // cout << pathcount << endl;
+    //cout << pathcount << endl;
     //intialize vector to sort 
     vector<pair<Vertex, float>> sorted_bc;
     // Pushing all Vertices and BC into this vector
@@ -356,7 +356,8 @@ float Graph::getPercentUserBetweennessCentrality(int id) {
         // formula is dividing through each pair not including current vertex
         // by (N - 1)(N - 2)/2 where N is the number of nodes in the graph
         float scaleFactor = 2.0 / ((size - 1) * (size - 2));
-        return betweennessCentrality[id] * scaleFactor;
+        // multiply by 100 to get as percentage
+        return betweennessCentrality[id] * scaleFactor * 100;
     }
     return -1.0;
 }

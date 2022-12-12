@@ -18,18 +18,22 @@ int main(int argc, char *argv[]) {
     g.BetweennessCentrality();
     vector<Vertex> ranked = g.getTopIDs(num_place);
     cout << "Here is the top " << num_place << " of this social network graph:" << endl; 
-    cout << "According to the Betweeness Centrality(BC) Algorithm " << endl;
+    cout << "According to the Betweeness Centrality (BC) Algorithm " << endl;
     cout << "BC represents the number of shortest paths of all pairs in the network that the user is part of!" << endl;
+    cout << endl;
     int i = 0;
     for (auto& v : ranked) {
         if (i != num_place) {
-            cout << " #" << i + 1 << ": " << v << endl;
+            cout << i + 1 << ": " << " User with ID - " << v;
+            cout << ",  BC Value: " << g.getUserBetweennessCentrality(ranked.at(i));
+            cout << ",  As Percentage: " << g.getPercentUserBetweennessCentrality(ranked.at(i)) << "%" << endl;
         }
         i++;
     }
-    cout << "Here is the number 1 user in this social network graph! " << endl;
+    cout << endl;
+    cout << "Here is the number 1 user in this social network graph based on BC! " << endl;
     cout << "User: " << ranked.at(0) << " and their BC Value: " << g.getUserBetweennessCentrality(ranked.at(0)) <<endl;
-    cout << "And this is their normalized BC Value: " << g.getPercentUserBetweennessCentrality(ranked.at(0)) <<endl;
+    cout << "And this is their BC Value as a percentage of estimated number of shortest paths: " << g.getPercentUserBetweennessCentrality(ranked.at(0)) << "%" << endl;
     cout << endl;
     return 0;
 }
