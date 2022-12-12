@@ -132,7 +132,7 @@ class Graph
         float getUserBetweennessCentrality(int id);
 
         /**
-         * Returns BC Value as percentage for one user, based on normalization factor
+         * Returns BC Value for one user in terms of percentage
          * @param id - vertex ID for user
          * @return - number representing normalized BC Value for user
         */
