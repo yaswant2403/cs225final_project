@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     }
     cout << "Here is the number 1 user in this social network graph! " << endl;
     cout << "User: " << ranked.at(0) << " and their BC Value: " << g.getUserBetweennessCentrality(ranked.at(0)) <<endl;
-    cout << "And this is their normalized BC Value: " << g.getNormalizedUserBetweennessCentrality(ranked.at(0)) <<endl;
+    cout << "And this is their normalized BC Value: " << g.getPercentUserBetweennessCentrality(ranked.at(0)) <<endl;
     cout << endl;
     return 0;
 }

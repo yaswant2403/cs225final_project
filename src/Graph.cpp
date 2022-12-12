@@ -345,7 +345,7 @@ float Graph::getUserBetweennessCentrality(int id) {
     return -1.0;
 }
 
-float Graph::getNormalizedUserBetweennessCentrality(int id) {
+float Graph::getPercentUserBetweennessCentrality(int id) {
     // if betweenessCentrality hasn't been calculated, go calculate it first
     if (!calculatedBC) {
         BetweennessCentrality();
