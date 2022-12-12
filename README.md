@@ -46,13 +46,13 @@ make test
 #### Here are the ways to run the programs:  
 If you want to use your own file to build a graph, you need to feed the programs an edge list text file. Take a look at our data folder for examples of edge list text files. Each line contatins an edge and each edge is two `int` node ids seperated by a comma.  
 
-For `BFS` run:  
+##### For `BFS` run:  
 ```
 ./BFS [filename]
 ```
 Where `filename` is a string path to your file, for example `../data/686.edges`  
 
-For `PageRank` run:
+##### For `PageRank` run:
 ```
 ./PageRank [filename] [num_places]
 ```
@@ -60,7 +60,7 @@ Where `filename` is a string path to your file, for example `../data/686.edges`
 and `num_places` is an int for how many top nodes you want displayed  
 
 
-For `Betweenness Centrality` run:
+##### For `Betweenness Centrality` run:
 ```
 ./BC [filename] [num_places]
 ```
