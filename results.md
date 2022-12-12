@@ -32,8 +32,8 @@ Our Betweenness Centrality mostly works correctly, and runs in a reasonable amou
 (N-1)(N-2)/2 * total number of shortest paths that the current node is a part of.
 (where N is number of nodes in Graph)
 
-Nodes with higher betweenness centrality have more control and higher importance over the network of Facebook profiles, as more information passes through those nodes. To test our Betweenness Centrality algorithm, we wrote test cases for smaller graphs and then used Python with the networkX module for testing on our dataset.
-
+Nodes with higher betweenness centrality have more control and higher importance over the network of Facebook profiles, as more information passes through those nodes. To test our Betweenness Centrality algorithm, we wrote test cases for smaller graphs and then used Python with the NetworkX module for testing on our dataset.
+Based on our testing, we evaluate our Betweenness Centrality implementation to be mostly correct. While our results are completely correct for small graphs, both connected and disconnected, we found some differences in results when testing on the main dataset. Specifically, while our algorithm found the top 5 users based on BC to be users 828, 713, 705, 719 and 805, the NetworkX module found the top 5 users based on BC to be 713, 828, 818, 719, and 805. Thus, while we were able to get 4/5 of the right users for top 5, their order is also slightly off. We believe the difference may lie in the methods used to count the number of times a node comes up in shortest paths. The NetworkX implementation uses Brandes's algorithm, so they use a specific Accumulation function in order to count the number of times a node is in shortest paths. Given more time, we would continue to investigate the differences in our approaches to count this, and hopefully discover the source of differences in our calculations and rankings.
 
 Example Result:
 ```
