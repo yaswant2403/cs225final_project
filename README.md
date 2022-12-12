@@ -5,8 +5,7 @@ Afif Shomali (shomali2) \
 Lisa Jing Leung (ljleung2) \
 Libby Codamon (ecoda2) 
 
-## The link to our final presentation
-https://mediaspace.illinois.edu/media/t/1_4zyri3x5
+## [The link to our final presentation](https://mediaspace.illinois.edu/media/t/1_4zyri3x5)
 
 ## Written Final Report can be found in results.md
 
