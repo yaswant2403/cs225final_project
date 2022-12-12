@@ -7,7 +7,7 @@ Libby Codamon (ecoda2)
 
 ## The link to our final presentation  (add later when we finish video)
 
-## Insert link to final report
+## Insert Link to Final Report
 
 ## Repo Structure
 Team Contract, Proposal, Weekly Logs & Written Report can be found in [`documents/`](https://github.com/yaswant2403/cs225final_project/tree/main/documents)  

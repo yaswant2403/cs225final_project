@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 #include <unordered_map>
 #include <list>
 #include <vector>
@@ -52,6 +53,17 @@ class Graph
          *         - list with -1 if vertex doesn't exist
         */
         list<Vertex> getAdjacencyList (int id);
+
+        /**
+         * Adds a vertex to the graph
+        */
+        void AddVertex(int id);
+
+        /**
+         * Adds an edge between two vertices
+         * Since this is undirected, we add to both adj lists
+        */
+        void AddEdge(int id1, int id2);
 
         /**
          * Check if a vertex with passed id exists
@@ -103,46 +115,40 @@ class Graph
          * Performs BetweenessCentrality on our Graph to see who the most important people are in the network
          * @return - vector of all vertices' betweenness centrality values
         */
-        vector<std::pair<Vertex, float>> BetweennessCentrality();
+        void BetweennessCentrality();
 
         /**
          * Displays most popular users/vertices in graph based on betweenness centrality
          * @param num_places - How many places of rankings to return (eg: top 5, 10, etc.)
          * @return void - prints out num_places number of vertices / users and their betweenness centrality value
         */
-        void getBetweennessCentrality(int num_places);
+        vector<Vertex> getTopIDs(int num_places);
 
         /**
-         * returns Betweenness Centrality value for one user
+         * Returns Betweenness Centrality value for one user
          * @param id - vertex ID for user
-         * @return - number representing percentage of how many shortest paths in network user is part of
+         * @return - number representing how many shortest paths in network user is a part of
         */
         float getUserBetweennessCentrality(int id);
 
         /**
-         * Adds a vertex to the graph
+         * Returns Normalized BC Value for one user
+         * @param id - vertex ID for user
+         * @return - number representing normalized BC Value for user
         */
-        void AddVertex(int id);
+        float getNormalizedUserBetweennessCentrality(int id);
 
         /**
-         * Adds an edge between two vertices
-         * Since this is undirected, we add to both adj lists
+         * returns Betweenness Centrality map which holds user and their BC value
+         * @return - betweenessCentrality map of all users
         */
-        void AddEdge(int id1, int id2);
+        unordered_map<Vertex, float> getAllBetweennessCentrality();
 
         /**
          * Prints graph in adj list format for testing 
         */
         void print() const;
-        
-        /**
-         * Gets any nodes that are completely disconnected from other nodes for testing 
-        */
-        vector<Vertex> getDisconnectedNodes();
 
-        //uncomment this below if we do a visual output, we would also need to add 
-        //225 PNG class/ add a lib folder with all the 225 stuff
-        //PNG DrawGraph();
     private:
         /**
          * Calculates 1 norm of vector to help PageRank calculation
@@ -153,10 +159,14 @@ class Graph
          * Meaning the sum of column / non zero elements == 1
         */
         Matrix makeAdjMatrix(unordered_map<Vertex, int>& reverse_idx);
-        // If our graph becomes too big to store on stack, we can make this into a pointer
-        mutable unordered_map<Vertex, list<Vertex>>* adj_list;
-        // change to pointer if too big to store on stack
-        mutable unordered_map<Vertex, bool>* visited;
+        // Adjancency List of Vertex and all its neighbors
+        unordered_map<Vertex, list<Vertex>>* adj_list;
+        // Map of all vertices and whether they've been visited or not
+        unordered_map<Vertex, bool> visited;
+        // Map of all vertices and their BC value
+        unordered_map<Vertex, float> betweennessCentrality;
+        // Bool to check whether betweenessCentrality has been calculated or not
+        bool calculatedBC;
         // Size of graph which we define to be number of vertices
         int size;
 

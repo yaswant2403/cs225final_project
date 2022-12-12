@@ -12,9 +12,9 @@
  * Test cases for Graph 
 */
 
-TEST_CASE("BuildGraph Small") {
+TEST_CASE("BuildGraph Small", "[ADT]") {
     Graph g;
-    g.BuildGraph("../data/small_test.txt");
+    g.BuildGraph("../data/small_2_graph.txt");
     //g.print();
     REQUIRE(g.vertexExists(1));
     REQUIRE(g.vertexExists(2));
@@ -23,9 +23,9 @@ TEST_CASE("BuildGraph Small") {
     REQUIRE(g.vertexExists(9));
 } 
 
-TEST_CASE("BuildGraph Disconnected") {
+TEST_CASE("BuildGraph Disconnected", "[ADT]") {
     Graph g;
-    g.BuildGraph("../data/disconnected.txt");
+    g.BuildGraph("../data/small_disconnected.txt");
     //g.print();
     REQUIRE(g.vertexExists(1));
     REQUIRE(g.vertexExists(2));
@@ -45,7 +45,7 @@ TEST_CASE("BuildGraph Disconnected") {
     REQUIRE_FALSE(g.edgeExists(6, 3));
 }
 
-TEST_CASE("Build Graph Dataset") {
+TEST_CASE("Build Graph Dataset", "[ADT]") {
     Graph g;
     g.BuildGraph("../data/686.edges");
     REQUIRE(g.getSize() == 168);
