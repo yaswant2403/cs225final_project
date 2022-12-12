@@ -81,4 +81,9 @@ and `num_places` is an int for how many top nodes you want displayed
 Where `filename` is a string path to your file, for example `../data/686.edges`  
 and `num_places` is an int for how many top nodes you want displayed  
 
+#### For `Test` just run:
+```
+./test
+```
+
 
