@@ -15,7 +15,7 @@ Here is the BFS traversal order of this social network graph:
 
 ```
 ### PageRank: 
-Our PageRank works correctly, and runs in a reasonable amount of time for our entire dataset. Similar to the original PageRank algorithm used by Google Search to rank web pages in their search engine results, we were able to measure the importance of Facebook friends within a network dataset by using an analysis algorithm that assigns a weight to each element. To test the PageRank algorithm we made a few smaller example graphs, including ones with multiple connected components and checked the results against the same Algorithm implemented in python. 
+Our PageRank works correctly, and runs in a reasonable amount of time for our entire dataset. It achieves our proposed runtime of Ө(n<sup>3</sup>). Similar to the original PageRank algorithm used by Google Search to rank web pages in their search engine results, we were able to measure the importance of Facebook friends within a network dataset by using an analysis algorithm that assigns a weight to each element. To test the PageRank algorithm we made a few smaller example graphs, including ones with multiple connected components and checked the results against the same Algorithm implemented in python. 
 Example Result:
 ```
 Here are the top 5 ranked users in this social network graph:
@@ -27,7 +27,7 @@ Here are the top 5 ranked users in this social network graph:
 ```
 
 ### Betweenness Centrality:
-Our Betweenness Centrality mostly works correctly, and runs in a reasonable amount of time for our dataset. Our runtime is Ө(n3), which is currently the fastest known time for this algorithm. The runtime we listed in the proposal is based on Brande’s Centrality (a faster way to implement Degree Centrality). Using our Betweenness Centrality algorithm, we were able to correctly measure the centrality of each node in a graph based on the total number of shortest path between Facebook profiles. More specifically, Betweenness Centrality represents the percentage of shortest paths of all pairs in the network that a user is a part of. The percentage is calculated through this formula:
+Our Betweenness Centrality mostly works correctly, and runs in a reasonable amount of time for our dataset. Our runtime is Ө(n<sup>3</sup>), which is currently the fastest known time for this algorithm. The runtime we listed in the proposal is incorrect as that is for the Brande’s Centrality algorithm (a faster version of Degree Centrality). Since the original plan was always to implement Degree Centrality, our current runtime meets our goal. Using our Betweenness Centrality algorithm, we were able to correctly measure the centrality of each node in a graph based on the total number of shortest paths it's a part of between other Facebook users. More specifically, Betweenness Centrality represents the percentage of shortest paths of all pairs in the network that a user is a part of. The percentage is calculated through this formula:
 
 (N-1)(N-2)/2 * total number of shortest paths that the current node is a part of.
 (where N is number of nodes in Graph)
