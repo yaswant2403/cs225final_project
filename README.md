@@ -7,21 +7,21 @@ Libby Codamon (ecoda2)
 
 ## [The link to our final presentation](https://mediaspace.illinois.edu/media/t/1_4zyri3x5)
 
-## [Written Final Report link](https://github.com/yaswant2403/cs225final_project/blob/main/results.md)
+## [Written Final Report link](https://github.com/yaswant2403/facebook_famous/blob/main/results.md)
 
 ## Repo Structure
-Team Contract, Proposal, Weekly Logs & Written Report can be found in [`documents/`](https://github.com/yaswant2403/cs225final_project/tree/main/documents)  
-The dataset & testing data is stored as text files are stored in [`data/`](https://github.com/yaswant2403/cs225final_project/tree/main/data)   
-The tests are stored in [`tests/`](https://github.com/yaswant2403/cs225final_project/tree/main/tests)  
-All source code files are stored in [`src/`](https://github.com/yaswant2403/cs225final_project/tree/main/src)  
-The entry point source files are stored in [`entry/`](https://github.com/yaswant2403/cs225final_project/tree/main/entry)  
+Team Contract, Proposal, Weekly Logs & Written Report can be found in [`documents/`](https://github.com/yaswant2403/facebook_famous/tree/main/documents)  
+The dataset & testing data is stored as text files are stored in [`data/`](https://github.com/yaswant2403/facebook_famous/tree/main/data)   
+The tests are stored in [`tests/`](https://github.com/yaswant2403/facebook_famous/tree/main/tests)  
+All source code files are stored in [`src/`](https://github.com/yaswant2403/facebook_famous/tree/main/src)  
+The entry point source files are stored in [`entry/`](https://github.com/yaswant2403/facebook_famous/tree/main/entry)  
 
 
 ## Running code 
 
 First open the CS225 docker enviorment, and clone the repository locally by running this in the terminal:
 ```
-git clone https://github.com/yaswant2403/cs225final_project.git
+git clone https://github.com/yaswant2403/facebook_famous.git
 ```
 Then cd into the repository, create a build directory & cd into it:
 ```
