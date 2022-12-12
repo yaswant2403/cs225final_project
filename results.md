@@ -1,12 +1,12 @@
-Y’ALL Final Results - Written Report:
+# Y’ALL Final Results - Written Report:
 
-ADT Implementation:
+## ADT Implementation:
 
 To implement this project, we created a Graph class to handle creating graphs and the algorithms: BFS, PageRank, and Betweenness Centrality. We also implemented a Matrix class to make the PageRank algorithm simpler to implement, as we did not have access to a linear algebra library. 
 
-Algorithms:
+## Algorithms:
 
-BFS:
+### BFS:
 Our Breadth First Search, BFS, algorithm traversal runs correctly and works on our larger dataset of Facebook profiles. Our BFS algorithm traverses through the friend network dataset to find connected components of the graph, and correctly searches the data structure using a first in-first out queue. To ensure BFS worked correctly, we made a few smaller test case graphs, including ones that have multiple connected components. 
 Example Result:
 ```
@@ -14,7 +14,7 @@ Here is the BFS traversal order of this social network graph:
 4 9 1 2 3 
 
 ```
-PageRank: 
+### PageRank: 
 Our PageRank works correctly, and runs in a reasonable amount of time for our entire dataset. Similar to the original PageRank algorithm used by Google Search to rank web pages in their search engine results, we were able to measure the importance of Facebook friends within a network dataset by using an analysis algorithm that assigns a weight to each element. To test the PageRank algorithm we made a few smaller example graphs, including ones with multiple connected components and checked the results against the same Algorithm implemented in python. 
 Example Result:
 ```
@@ -26,8 +26,13 @@ Here are the top 5 ranked users in this social network graph:
 5: User with I.D. 805
 ```
 
-Betweenness Centrality:
-Our Betweenness Centrality works correctly, and runs in a reasonable amount of time for our dataset. Using our Betweenness Centrality algorithm, we were able to correctly measure the centrality in a graph based on the shortest path between Facebook profiles. More specifically, Betweenness Centrality represents the percentage of shortest paths of all pairs in the network that a user is a part of. Nodes with higher betweenness centrality have more control and higher importance over the network of Facebook profiles, as more information passes through those nodes. To test our Betweenness Centrality algorithm, we used a Python Network for actual graph testing.
+### Betweenness Centrality:
+Our Betweenness Centrality mostly works correctly, and runs in a reasonable amount of time for our dataset. Our runtime is Ө(n3), which is currently the fastest known time for this algorithm. The runtime we listed in the proposal is based on Brande’s Centrality (a faster way to implement Degree Centrality). Using our Betweenness Centrality algorithm, we were able to correctly measure the centrality of each node in a graph based on the total number of shortest path between Facebook profiles. More specifically, Betweenness Centrality represents the percentage of shortest paths of all pairs in the network that a user is a part of. The percentage is calculated through this formula:
+
+![For Unweighted Graphs](https://www.geeksforgeeks.org/wp-content/ql-cache/quicklatex.com-dfb7f4acf1fea230984ae7e20ba7b273_l3.svg) * total number of shortest paths that the current node is a part of. 
+
+Nodes with higher betweenness centrality have more control and higher importance over the network of Facebook profiles, as more information passes through those nodes. To test our Betweenness Centrality algorithm, we wrote test cases for smaller graphs and then used Python with the networkX module for testing on our dataset.
+
 
 Example Result:
 ```
@@ -40,7 +45,7 @@ Here is the Betweenness Centrality ranking of our dataset:
 
 ```
 	
-Leading Question:
+## Leading Question:
 
 Is it possible to produce a Facebook profile search tool where users can input a user profile and receive their importance within the Facebook network? 
 
