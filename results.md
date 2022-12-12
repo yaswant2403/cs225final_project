@@ -41,5 +41,7 @@ Here is the Betweenness Centrality ranking of our dataset:
 ```
 	
 Leading Question:
+
 Is it possible to produce a Facebook profile search tool where users can input a user profile and receive their importance within the Facebook network? 
+
 Yes, as a team we were able to create algorithms using Breadth First Search, PageRank, and Betweenness Centrality to create a tool that helps search for Facebook users of highest importance. We define importance as the amount of social connections that a user has. Thus, the more important a user, the more information flows through them. We were able to successfully measure this popularity through node importance using PageRank, display the percentage of how many connections the user is integral to using Betweenness Centrality, and traverse through our dataset using BFS. We discovered that a combination of these three types of algorithms can ultimately produce a profile search tool for finding Facebook profiles of high importance on a dataset.
