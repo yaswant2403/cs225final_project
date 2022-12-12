@@ -59,5 +59,3 @@ For `Betweenness Centrality` run:
 ```
 Where `filename` is a string path to your file, for example `../data/686.edges`  
 and `num_places` is an int for how many top nodes you want displayed  
-
-(Todo: Add the rest of our demonstration files & how to correcty run them)
