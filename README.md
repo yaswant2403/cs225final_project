@@ -1,4 +1,4 @@
-# CS225 Final Project (Y'ALL)
+# Facebook Famous (CS225 Final Project)
 ## Contributors  
 Yash Ejjagiri (yse2) \
 Afif Shomali (shomali2) \
