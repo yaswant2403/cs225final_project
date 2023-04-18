@@ -86,4 +86,3 @@ and `num_places` is an int for how many top nodes you want displayed
 ./test
 ```
 
-
